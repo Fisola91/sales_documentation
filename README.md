@@ -1,1 +1,8 @@
-Let's document our sales
+## Let's document our sales
+
+## Running instructions
+
+```
+bundle
+./bin/dev
+```
