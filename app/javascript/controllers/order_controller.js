@@ -62,8 +62,8 @@ export default class extends Controller {
 
     nameCell.textContent = name
     quantityCell.textContent = quantity
-    unitPriceCell.textContent = unitPrice
-    totalCell.textContent = total
+    unitPriceCell.textContent = Number.parseFloat(unitPrice).toFixed(2)
+    totalCell.textContent = Number.parseFloat(total).toFixed(2)
 
     nameCell.classList.add("border", "px-4", "text-left")
     quantityCell.classList.add("border", "px-4", "text-right")
