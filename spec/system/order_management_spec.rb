@@ -20,8 +20,8 @@ RSpec.describe "signed merchant can navigate through different pages" do
         within 'table[data-order-target="summaryTable"] .line-items' do
             expect(find_field("name").value) be_empty
             expect(find_field("quantity").value) be_empty
-            expect(find_field("unit_price").value) be_eempty
-            expect(find_field("total").value) be_eempty
+            expect(find_field("unit_price").value) be_empty
+            expect(find_field("total").value) be_empty
         end
     end
 
@@ -39,4 +39,43 @@ RSpec.describe "signed merchant can navigate through different pages" do
 
         expect(page).to have_field("total", with: "1000")
     end
+
+    it "creates a 'Total' sums row" do
+        expect(page).to have_text("Recent sales")
+        expect(page).to have_link("Enter sales")
+        expect(page).to have_link("see more")
+
+        click "Enter sales"
+
+        fill_in "name", with: "Product A"
+        fill_in "quantity", with: 10
+        fill_in "unit_price", with: 100
+        click_button "Save"
+
+        expect(page).to have_link("Enter sales")
+
+        click "Enter sales"
+
+        fill_in "name", with: "Product A"
+        fill_in "quantity", with: 20
+        fill_in "unit_price", with: 100
+        click_button "Save"
+
+        within all('table[data-order-target="summaryTable"] .line-item').first do
+            expect(page).to have_content("10")
+            expect(page).to have_content("100")
+            expect(page).to have_content("1000")
+        end
+        within all('table[data-order-target="summaryTable"] .line-item').last do
+            expect(page).to have_content("10")
+            expect(page).to have_content("200")
+            expect(page).to have_content("2000")
+        end
+        within 'table[data-order-target="summaryTable"] tr.sums-row' do
+            expect(page).to have_content('Total')
+            expect(page).to have_content('20')
+            expect(page).to have_content('3000')
+        end
+    end
+
 end
