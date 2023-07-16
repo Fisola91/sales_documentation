@@ -1,5 +1,5 @@
 class PublicController < ApplicationController
-  def index
-    @component = OrderPage.new
-  end
+  # def index
+  #   @component = OrderPage.new
+  # end
 end
