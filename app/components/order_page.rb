@@ -5,9 +5,6 @@ class OrderPage < ViewComponent::Base
 
   def summary
     return if @order.nil?
-    @order.name
-    @order.quantity
-    @order.unit_price
-    @order.total
+    @order
   end
 end
