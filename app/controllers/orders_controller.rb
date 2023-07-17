@@ -9,9 +9,9 @@ class OrdersController < ApplicationController
   end
 
   def create
-    order = Order.new(order_params)
-    if order.save
-      redirect_to order_path(order)
+    @order = Order.new(order_params)
+    if @order.save
+      redirect_to order_path(@order)
     else
       render "new"
     end

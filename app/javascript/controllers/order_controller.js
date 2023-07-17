@@ -17,7 +17,7 @@ export default class extends Controller {
     event.preventDefault()
     const lastForm = this.formTargets[this.formTargets.length - 1]
     const summaryRow = this.createSummaryRow(lastForm)
-
+   
     const sumsRow = this.summaryTableBodyTarget.querySelector("[data-order-target='sumsRow']")
     if (sumsRow) {
       this.summaryTableBodyTarget.insertBefore(summaryRow, sumsRow)
