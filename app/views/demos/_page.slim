@@ -1,0 +1,10 @@
+#the_entire_page
+  p Content of the file:
+  #lines.bg-yellow-200
+    - @content.split("\n").each do |line|
+      p = line
+
+  = form_with url: "/demo", method: :post, data: { turbo: false} do |f|
+    = f.text_field :something, autofocus: true
+    br
+    = f.submit
