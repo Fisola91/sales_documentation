@@ -1,10 +1,8 @@
 class OrderPage < ViewComponent::Base
-  def initialize(order: nil)
+  def initialize(order:)
     @order = order
   end
 
-  def summary
-    return if @order.nil?
-    @order
-  end
+  private
+    attr_reader :order
 end

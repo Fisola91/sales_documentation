@@ -1,11 +1,12 @@
-=link_to "Enter sales", new_order_path
--if summary 
-  .max-w-md.mx-auto data={ controller: "order" }
-    table.w-full.border-collapse.my-4.hidden data={ "order-target": "summaryTable" }
-      thead
-        tr
-          th.border.px-4.text-left Name
-          th.border.px-4.text-right Quantity
-          th.border.px-4.text-right Unit Price
-          th.border.px-4.text-right Total
-      tbody data={ "order-target": "summaryTableBody" }
+
+/ .table-summary data={ controller: "order" }
+/   table data={ "order-target": "summaryTable" }
+/     thead
+/       tr
+/         th.border.px-4.text-left Name
+/         th.border.px-4.text-right Quantity
+/         th.border.px-4.text-right Unit Price
+/         th.border.px-4.text-right Total
+/     tbody.table-body data={ "order-target": "tableRow", "name": :"#{order.name}", "quantity": :"#{order.quantity}", "unit_price": :"#{order.unit_price}", "total": :"#{order.total}" } 
+      
+/ = link_to "new order", new_order_path
