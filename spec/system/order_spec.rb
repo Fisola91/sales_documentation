@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Order management', type: :system do
   before do
-    visit '/'
+    visit '/prototype'
   end
 
   it 'displays the initial state of the page' do
