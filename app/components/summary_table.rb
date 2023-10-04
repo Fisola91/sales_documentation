@@ -4,7 +4,7 @@ class SummaryTable < ViewComponent::Base
     @show = show
   end
 
-  def ground_total
+  def grand_total
     total_sum = orders.reduce(0) do |sum, hash| 
       sum + hash[:total] 
     end
