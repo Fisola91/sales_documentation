@@ -4,6 +4,13 @@ class SummaryTable < ViewComponent::Base
     @show = show
   end
 
+  def ground_total
+    total_sum = orders.reduce(0) do |sum, hash| 
+      sum + hash[:total] 
+    end
+    total_sum
+  end
+
   attr_reader :orders, :show
 
   def show_class

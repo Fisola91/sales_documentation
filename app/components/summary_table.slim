@@ -12,3 +12,9 @@ table#summary-table.w-full.border-collapse.my-4 class=show_class
         td.border.px-4.text-right = order.quantity
         td.border.px-4.text-right = order.unit_price
         td.border.px-4.text-right = order.total
+  tfoot 
+    tr 
+      td.border.font-bold.px-4.text-left Total
+      td.border.font-bold.px-4.text-right 0
+      td.border.px-4.text-right 
+      td.border.font-bold.px-4.text-right = ground_total
