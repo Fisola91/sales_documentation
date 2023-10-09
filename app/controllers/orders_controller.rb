@@ -39,13 +39,17 @@ class OrdersController < ApplicationController
       orders: all_orders,
       show: all_orders.any?
     )
-
   end
 
   def update
     order = Order.find(params[:id])
+    quantity = params.dig(:order, :quantity).to_f
+    unit_price = params.dig(:order, :unit_price).to_f
 
-    if order.update(safe_params)
+    total = quantity * unit_price
+    order_params = safe_params.merge(total: total)
+    
+    if order.update(order_params)
       redirect_to orders_url
     else
       raise NotImplementedError, "Order saving errors not handled"
@@ -59,6 +63,6 @@ class OrdersController < ApplicationController
   end
 
   def all_orders
-    @all_orders ||= Order.all
+    @all_orders ||= Order.order(created_at: :asc)
   end
 end
