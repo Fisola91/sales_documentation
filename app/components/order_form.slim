@@ -1,4 +1,4 @@
-= form_with url: orders_path, scope: :order, method: :post, html: { class: "w-100" }, data: { controller: "order" } do |f|
+=  form_with url: form_url, scope: :order, method: form_method, html: { class: "w-100"}, data: { controller: "order", turbo: form_turbo } do |f|
   .mb-2
     = f.label :name, class: "block text-gray-700 text-sm font-bold"
     = f.text_field :name, class: "form-input mt-1 block w-full",autofocus: true, tabindex: 1

@@ -12,6 +12,7 @@ table#summary-table.w-full.border-collapse.my-4 class=show_class
         td.border.px-4.text-right = order.quantity
         td.border.px-4.text-right = order.unit_price
         td.border.px-4.text-right = order.total
+        td.border.px-4.text-right = link_to "edit", edit_order_path(order.id)
   tfoot 
     tr 
       td.border.font-bold.px-4.text-left Total

@@ -31,6 +31,27 @@ class OrdersController < ApplicationController
     end
   end
 
+  def edit
+    @order = Order.find(params[:id])
+    @form = OrderForm.new(order: @order)
+
+    @summary = SummaryTable.new(
+      orders: all_orders,
+      show: all_orders.any?
+    )
+
+  end
+
+  def update
+    order = Order.find(params[:id])
+
+    if order.update(safe_params)
+      redirect_to orders_url
+    else
+      raise NotImplementedError, "Order saving errors not handled"
+    end
+  end
+
   private
 
   def safe_params

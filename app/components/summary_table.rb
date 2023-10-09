@@ -18,7 +18,7 @@ class SummaryTable < ViewComponent::Base
     total_quantity
   end
 
-  attr_reader :orders, :show
+  attr_reader :orders, :show, :f
 
   def show_class
     if show
