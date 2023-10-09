@@ -4,27 +4,16 @@ class OrderForm < ViewComponent::Base
   end
 
   def form_method
-    if order 
-      :patch
-    else
-      :post
-    end 
+    order ? :patch : :post
   end
 
   def form_url
-    if order
-      order_path(order.id)
-    else
-      orders_path
-    end
+    order ? order_path(order) : orders_path
   end
 
   def form_turbo
-    if order
-      false
-    else
-      true
-    end
+    order ? false : true
   end
+
   attr_reader :order
 end
