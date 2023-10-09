@@ -52,7 +52,20 @@ class OrdersController < ApplicationController
     if order.update(order_params)
       redirect_to orders_url
     else
-      raise NotImplementedError, "Order saving errors not handled"
+      render :edit
+    end
+  end
+
+  def destroy
+    order = Order.find(params[:id])
+    order.destroy
+    respond_to do |format|
+      format.turbo_stream do 
+        render turbo_stream: turbo_stream.replace(
+          "summary-table",
+          SummaryTable.new(orders: all_orders)
+        )
+      end
     end
   end
 
