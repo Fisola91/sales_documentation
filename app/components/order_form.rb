@@ -15,5 +15,9 @@ class OrderForm < ViewComponent::Base
     order ? false : true
   end
 
+  def submit
+    order ? "Update" : "Save"
+  end
+
   attr_reader :order
 end
