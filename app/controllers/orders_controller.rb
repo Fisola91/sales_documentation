@@ -20,10 +20,16 @@ class OrdersController < ApplicationController
     if order.save
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
-            "summary-table",
-            SummaryTable.new(orders: all_orders)
-          )
+          render turbo_stream: [
+            turbo_stream.replace(
+              "summary-table",
+              SummaryTable.new(orders: all_orders)
+            ),
+            turbo_stream.replace(
+              "form",
+              OrderForm.new
+            )
+          ]
         end
       end
     else
