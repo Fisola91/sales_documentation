@@ -1,0 +1,29 @@
+.max-w-md.mx-auto data={ controller: "prototype" }
+  table.w-full.border-collapse.my-4.hidden data={ "prototype-target": "summaryTable" }
+    thead
+      tr
+        th.border.px-4.text-left Name
+        th.border.px-4.text-right Quantity
+        th.border.px-4.text-right Unit Price
+        th.border.px-4.text-right Total
+    tbody data={ "prototype-target": "summaryTableBody" }
+
+  = form_with url: "/", html: { class: "w-100", data: { "prototype-target": "form" } } do |f|
+    .mb-2
+      = f.label :name, class: "block text-gray-700 text-sm font-bold"
+      = f.text_field :name, class: "form-input mt-1 block w-full", data: { action: "change->order#calculate", "prototype-target": :name }, autofocus: true, tabindex: 1
+
+    .mb-2
+      = f.label :quantity, class: "block text-gray-700 text-sm font-bold"
+      = f.number_field :quantity, class: "form-input mt-1 block w-full", step: 1, min: 0, data: { action: "change->order#calculate", "prototype-target": :quantity }, tabindex: 2
+
+    .mb-2
+      = f.label :unit_price, class: "block text-gray-700 text-sm font-bold"
+      = f.number_field :unit_price, class: "form-input mt-1 block w-full", data: { action: "change->order#calculate", "prototype-target": :unitPrice }, tabindex: 3
+
+    .mb-4
+      = f.label :total, class: "block text-gray-700 text-sm font-bold"
+      = f.text_field :total, class: "form-input mt-1 block w-full", readonly: true, placeholder: "Total", data: { "prototype-target": :total }, tabindex: -1
+
+    .mt-4
+      = f.submit "Save", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline", data: { action: "click->order#save" }, tabindex: 4

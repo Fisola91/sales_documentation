@@ -1,0 +1,22 @@
+table#summary-table.w-full.border-collapse.my-4 class=show_class
+  thead
+    tr
+      th.border.px-4.text-left Name
+      th.border.px-4.text-right Quantity
+      th.border.px-4.text-right Unit Price
+      th.border.px-4.text-right Total
+  tbody
+    - orders.each do |order|
+      tr
+        td.border.px-4.text-left = order.name
+        td.border.px-4.text-right = order.quantity
+        td.border.px-4.text-right = order.unit_price
+        td.border.px-4.text-right = order.total
+        td.border.px-4.text-right = link_to "edit", edit_order_path(order.id)
+        td.border.px-4.text-right = link_to "delete", order, data: { turbo_method: :delete }
+  tfoot 
+    tr 
+      td.border.font-bold.px-4.text-left Total
+      td.border.font-bold.px-4.text-right = grand_total_quantity
+      td.border.px-4.text-right 
+      td.border.font-bold.px-4.text-right = grand_total

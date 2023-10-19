@@ -20,6 +20,7 @@ group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails"
   gem "guard-rspec", require: false
+  gem "pry"
   gem "rspec-rails", "~> 6.0.3"
 end
 
@@ -30,7 +31,7 @@ end
 group :test do
   gem "capybara"
   gem "simplecov"
-  gem "webdrivers"
+  gem "selenium-webdriver"
 end
 
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]

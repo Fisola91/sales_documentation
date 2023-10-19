@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get "public/index"
+  get "prototype", to: "public#index"
 
-  root "public#index"
+  resources :orders, except: %i(show)
+
+  root "orders#index"
 end
