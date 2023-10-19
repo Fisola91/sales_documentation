@@ -15,12 +15,12 @@ gem "stimulus-rails"
 gem "tailwindcss-rails", "~> 2.0"
 gem "turbo-rails"
 gem "view_component"
-gem "pry"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails"
   gem "guard-rspec", require: false
+  gem "pry"
   gem "rspec-rails", "~> 6.0.3"
 end
 
