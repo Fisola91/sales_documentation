@@ -7,25 +7,27 @@ RSpec.describe 'Order management', type: :system do
 
   it 'displays the initial state of the page' do
     expect(page).to have_css('table.hidden', visible: false)
-    expect(find_field('name').value).to be_empty
-    expect(find_field('quantity').value).to be_empty
-    expect(find_field('unit_price').value).to be_empty
-    expect(find_field('total').value).to be_empty
+    expect(page).to have_field("Name", text: "")
+    expect(page).to have_field("Quantity", text: "")
+    expect(page).to have_field("Unit price", text: "")
+    expect(page).to have_field("Total", text: "", disabled: true)
   end
+
   context "when form input and submission" do
     it 'calculates the total and total sum row' do
-      fill_in 'name', with: 'Product A'
-      fill_in 'quantity', with: 10
-      fill_in 'unit_price', with: 2
-      find('#unit_price').send_keys(:tab)
-      expect(page).to have_field('total', with: '20.00')
+
+      fill_in 'Name', with: 'Product A'
+      fill_in 'Quantity', with: 10
+      fill_in 'Unit price', with: 2
+      find_field('Unit price').send_keys(:tab)
+      expect(page).to have_field('Total', with: '20.00', disabled: true)
       
       click_button "Save"
-    
-      expect(find_field('name').value).to be_empty
-      expect(find_field('quantity').value).to be_empty
-      expect(find_field('unit_price').value).to be_empty
-      expect(find_field('total').value).to be_empty
+
+      expect(page).to have_field("Name", text: "")
+      expect(page).to have_field("Quantity", text: "")
+      expect(page).to have_field("Unit price", text: "")
+      expect(page).to have_field("Total", text: "", disabled: true)
       
       within ("#summary-table tbody") do
         expect(page).to have_content("Product A")
@@ -35,7 +37,7 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_link("edit")
         expect(page).to have_link("delete")
       end
-      
+
       within ("#summary-table tfoot") do
         expect(page).to have_content("Total")
         expect(page).to have_content("10")
