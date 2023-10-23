@@ -39,12 +39,16 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
-    @form = OrderForm.new(order: @order)
-
-    @summary = SummaryTable.new(
-      orders: all_orders,
-      show: all_orders.any?
-    )
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.update(
+            "form",
+            OrderForm.new(order: @order)
+          )
+        ]
+      end
+    end
   end
 
   def update
