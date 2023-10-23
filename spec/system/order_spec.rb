@@ -95,5 +95,61 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("50")
       end
     end
+
+    fit "edits and updates the order information" do
+      fill_in "Name", with: "Product A"
+      fill_in "Quantity", with: 10
+      fill_in "Unit price", with: 2
+      find_field("Unit price").send_keys(:tab)
+      expect(page).to have_field("Total", with: "20.00", disabled: true)
+
+      click_button "Save"
+
+      within ("#summary-table tbody") do
+        expect(page).to have_content("Product A")
+        expect(page).to have_content("10.0")
+        expect(page).to have_content("2.0")
+        expect(page).to have_content("20.0")
+        expect(page).to have_link("edit")
+        expect(page).to have_link("delete")
+      end
+
+      within ("#summary-table tfoot") do
+        expect(page).to have_content("Total")
+        expect(page).to have_content("10.0")
+        expect(page).to have_content("20.0")
+      end
+      
+      within ("#summary-table tbody") do
+        click_link "edit"
+      end
+
+      expect(page).to have_field("Name", with: "Product A")
+      expect(page).to have_field("Quantity", with: "10.0")
+      expect(page).to have_field("Unit price", with: "2.0")
+      expect(page).to have_field("Total", with: "20.0", disabled: true)
+
+      fill_in "Name", with: "Product C"
+      fill_in "Unit price", with: 3
+      find_field("Unit price").send_keys(:tab)
+      expect(page).to have_field("Total", with: "30.00", disabled: true)
+
+      click_button "Update"
+
+      within ("#summary-table tbody") do
+        expect(page).to have_content("Product C")
+        expect(page).to have_content("10.0")
+        expect(page).to have_content("3.0")
+        expect(page).to have_content("30.0")
+        expect(page).to have_link("edit")
+        expect(page).to have_link("delete")
+      end
+
+      within ("#summary-table tfoot") do
+        expect(page).to have_content("Total")
+        expect(page).to have_content("10.0")
+        expect(page).to have_content("30.0")
+      end
+    end
   end
 end
