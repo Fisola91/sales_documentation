@@ -34,7 +34,7 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("10.0")
         expect(page).to have_content("2.0")
         expect(page).to have_content("20.0")
-        expect(page).to have_link("edit")
+        expect(page).to have_button("edit")
         expect(page).to have_link("delete")
       end
 
@@ -60,7 +60,7 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("10.0")
         expect(page).to have_content("2.0")
         expect(page).to have_content("20.0")
-        expect(page).to have_link("edit")
+        expect(page).to have_button("edit")
         expect(page).to have_link("delete")
       end
 
@@ -78,7 +78,7 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("10.0")
         expect(page).to have_content("2.0")
         expect(page).to have_content("20.0")
-        expect(page).to have_link("edit")
+        expect(page).to have_button("edit")
         expect(page).to have_link("delete")
       end
 
@@ -87,7 +87,7 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("10.0")
         expect(page).to have_content("3.0")
         expect(page).to have_content("30.0")
-        expect(page).to have_link("edit")
+        expect(page).to have_button("edit")
         expect(page).to have_link("delete")
       end
 
@@ -112,7 +112,7 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("10.0")
         expect(page).to have_content("2.0")
         expect(page).to have_content("20.0")
-        expect(page).to have_link("edit")
+        expect(page).to have_button("edit")
         expect(page).to have_link("delete")
       end
 
@@ -123,7 +123,7 @@ RSpec.describe 'Order management', type: :system do
       end
       
       within ("#summary-table tbody tr") do
-        click_link "edit"
+        click_button "edit"
       end
 
       expect(page).to have_field("Name", with: "Product A")
@@ -143,7 +143,7 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("10.0")
         expect(page).to have_content("3.0")
         expect(page).to have_content("30.0")
-        expect(page).to have_link("edit")
+        expect(page).to have_button("edit")
         expect(page).to have_link("delete")
       end
 
