@@ -14,8 +14,7 @@ RSpec.describe 'Order management', type: :system do
   end
 
   context "when form input and submission" do
-    it 'calculates the total and total sum row' do
-
+    it 'resets the form & calculates the total and total sum row' do
       fill_in 'Name', with: 'Product A'
       fill_in 'Quantity', with: 10
       fill_in 'Unit price', with: 2
@@ -23,13 +22,14 @@ RSpec.describe 'Order management', type: :system do
       expect(page).to have_field('Total', with: '20.00', disabled: true)
       
       click_button "Save"
+      expect(find("#summary-table tbody")).to have_css("tr", count: 1)
 
       expect(page).to have_field("Name", text: "")
       expect(page).to have_field("Quantity", text: "")
       expect(page).to have_field("Unit price", text: "")
       expect(page).to have_field("Total", text: "", disabled: true)
       
-      within ("#summary-table tbody") do
+      within ("#summary-table tbody tr") do
         expect(page).to have_content("Product A")
         expect(page).to have_content("10.0")
         expect(page).to have_content("2.0")
@@ -38,7 +38,7 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_link("delete")
       end
 
-      within ("#summary-table tfoot") do
+      within ("#summary-table tfoot tr") do
         expect(page).to have_content("Total")
         expect(page).to have_content("10")
         expect(page).to have_content("20")
@@ -53,8 +53,9 @@ RSpec.describe 'Order management', type: :system do
       expect(page).to have_field('Total', with: '20.00', disabled: true)
       
       click_button "Save"
+      expect(find("#summary-table tbody")).to have_css("tr", count: 1)
         
-      within ("#summary-table tbody") do
+      within ("#summary-table tbody tr") do
         expect(page).to have_content("Product C")
         expect(page).to have_content("10.0")
         expect(page).to have_content("2.0")
@@ -70,8 +71,9 @@ RSpec.describe 'Order management', type: :system do
       expect(page).to have_field('Total', with: '30.00', disabled: true)
       
       click_button "Save"
-      
-      within all("#summary-table tbody").first do
+      expect(find("#summary-table tbody")).to have_css("tr", count: 2)
+
+      within all("#summary-table tbody tr").first do
         expect(page).to have_content("Product C")
         expect(page).to have_content("10.0")
         expect(page).to have_content("2.0")
@@ -80,7 +82,7 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_link("delete")
       end
 
-      within all("#summary-table tbody").last do
+      within all("#summary-table tbody tr").last do
         expect(page).to have_content("Product B")
         expect(page).to have_content("10.0")
         expect(page).to have_content("3.0")
@@ -89,7 +91,7 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_link("delete")
       end
 
-      within ("#summary-table tfoot") do
+      within ("#summary-table tfoot tr") do
         expect(page).to have_content("Total")
         expect(page).to have_content("20")
         expect(page).to have_content("50")
@@ -105,7 +107,7 @@ RSpec.describe 'Order management', type: :system do
 
       click_button "Save"
 
-      within ("#summary-table tbody") do
+      within ("#summary-table tbody tr") do
         expect(page).to have_content("Product A")
         expect(page).to have_content("10.0")
         expect(page).to have_content("2.0")
@@ -114,13 +116,13 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_link("delete")
       end
 
-      within ("#summary-table tfoot") do
+      within ("#summary-table tfoot tr") do
         expect(page).to have_content("Total")
         expect(page).to have_content("10.0")
         expect(page).to have_content("20.0")
       end
       
-      within ("#summary-table tbody") do
+      within ("#summary-table tbody tr") do
         click_link "edit"
       end
 
@@ -136,7 +138,7 @@ RSpec.describe 'Order management', type: :system do
 
       click_button "Update"
 
-      within ("#summary-table tbody") do
+      within ("#summary-table tbody tr") do
         expect(page).to have_content("Product C")
         expect(page).to have_content("10.0")
         expect(page).to have_content("3.0")
@@ -145,26 +147,11 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_link("delete")
       end
 
-      within ("#summary-table tfoot") do
+      within ("#summary-table tfoot tr") do
         expect(page).to have_content("Total")
         expect(page).to have_content("10.0")
         expect(page).to have_content("30.0")
       end
-    end
-
-    it "resets the form" do
-      fill_in "Name", with: "Product A"
-      fill_in "Quantity", with: 10
-      fill_in "Unit price", with: 2
-      find_field("Unit price").send_keys(:tab)
-      expect(page).to have_field("Total", with: "20.00", disabled: true)
-
-      click_button "Save"
-
-      expect(page).to have_field("Name", text: "")
-      expect(page).to have_field("Quantity", text: "")
-      expect(page).to have_field("Unit price", text: "")
-      expect(page).to have_field("Total", text: "", disabled: true)
     end
   end
 end
