@@ -96,7 +96,7 @@ RSpec.describe 'Order management', type: :system do
       end
     end
 
-    fit "edits and updates the order information" do
+    it "edits and updates the product information" do
       fill_in "Name", with: "Product A"
       fill_in "Quantity", with: 10
       fill_in "Unit price", with: 2
@@ -150,6 +150,21 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("10.0")
         expect(page).to have_content("30.0")
       end
+    end
+
+    it "resets the form" do
+      fill_in "Name", with: "Product A"
+      fill_in "Quantity", with: 10
+      fill_in "Unit price", with: 2
+      find_field("Unit price").send_keys(:tab)
+      expect(page).to have_field("Total", with: "20.00", disabled: true)
+
+      click_button "Save"
+
+      expect(page).to have_field("Name", text: "")
+      expect(page).to have_field("Quantity", text: "")
+      expect(page).to have_field("Unit price", text: "")
+      expect(page).to have_field("Total", text: "", disabled: true)
     end
   end
 end
