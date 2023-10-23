@@ -1,0 +1,2 @@
+class SalesPerDayController < ApplicationController
+end
