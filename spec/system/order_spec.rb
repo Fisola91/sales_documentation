@@ -5,7 +5,7 @@ RSpec.describe 'Order management', type: :system do
     visit '/'
   end
 
-  fit 'displays the initial state of the page' do
+  it 'displays the initial state of the page' do
     expect(page).to have_css('table.hidden', visible: false)
     expect(page).to have_field("Name", text: "")
     expect(page).to have_field("Quantity", text: "")
