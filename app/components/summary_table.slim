@@ -1,6 +1,7 @@
 table#summary-table.w-full.border-collapse.my-4 class=show_class
   thead
     tr
+      th.border.px-4.text-left Date
       th.border.px-4.text-left Name
       th.border.px-4.text-right Quantity
       th.border.px-4.text-right Unit Price
@@ -8,6 +9,7 @@ table#summary-table.w-full.border-collapse.my-4 class=show_class
   tbody
     - orders.each do |order|
       tr
+        td.border.px-4.text-left = DateTime.parse(order[:created_at].to_s).strftime("%Y-%m-%d")
         td.border.px-4.text-left = order.name
         td.border.px-4.text-right = order.quantity
         td.border.px-4.text-right = order.unit_price

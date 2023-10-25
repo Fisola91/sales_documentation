@@ -1,11 +1,19 @@
 class OrdersController < ApplicationController
   def index
     @form = OrderForm.new
-
-    @summary = SummaryTable.new(
-      orders: all_orders,
-      show: all_orders.any?
-    )
+    if params["date"]
+      date = Date.parse(params["date"])
+      orders = Order.created_on(date)
+      @summary = SummaryTable.new(
+        orders: orders,
+        show: all_orders.any?
+      )
+    else
+      @summary = SummaryTable.new(
+        orders: all_orders,
+        show: all_orders.any?
+      )
+    end
   end
 
   def create
@@ -83,5 +91,8 @@ class OrdersController < ApplicationController
 
   def all_orders
     @all_orders ||= Order.order(created_at: :asc)
+  end
+
+  def date_format
   end
 end
