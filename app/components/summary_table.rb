@@ -5,15 +5,15 @@ class SummaryTable < ViewComponent::Base
   end
 
   def grand_total
-    total_sum = orders.reduce(0) do |sum, hash| 
-      sum + hash[:total] 
+    total_sum = orders.reduce(0) do |sum, hash|
+      sum + hash[:total]
     end
     total_sum
   end
 
   def grand_total_quantity
-    total_quantity = orders.reduce(0) do |sum, hash| 
-      sum + hash[:quantity] 
+    total_quantity = orders.reduce(0) do |sum, hash|
+      sum + hash[:quantity]
     end
     total_quantity
   end
@@ -22,9 +22,7 @@ class SummaryTable < ViewComponent::Base
     if orders.empty?
       nil
     else
-      date_time_str = orders.first.created_at.to_s
-      date_time = DateTime.parse(date_time_str)
-      date_str = date_time.strftime("%Y-%m-%d")
+      orders.first.created_at.strftime("%Y-%m-%d")
     end
   end
 
