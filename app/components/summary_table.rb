@@ -19,9 +19,13 @@ class SummaryTable < ViewComponent::Base
   end
 
   def date_caption
-    date_time_str = orders.first.created_at.to_s
-    date_time = DateTime.parse(date_time_str)
-    date_str = date_time.strftime("%Y-%m-%d")
+    if orders.empty?
+      nil
+    else
+      date_time_str = orders.first.created_at.to_s
+      date_time = DateTime.parse(date_time_str)
+      date_str = date_time.strftime("%Y-%m-%d")
+    end
   end
 
   attr_reader :orders, :show
