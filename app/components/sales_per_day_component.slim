@@ -3,7 +3,6 @@ table#all-sales-table.w-full.border-collapse.my-4
     tr
       th.border.px-4.text-left Date
       th.border.px-4.text-right Earnings
-      th.border.px-4.text-right Total amount
       th.border.px-4.text-right See details
   tbody
     - group_by_date.each do |date, value|
@@ -12,7 +11,6 @@ table#all-sales-table.w-full.border-collapse.my-4
         - value.reduce(0) do |sum, hash|
           - total = sum.to_f + hash[:total]
         td.border.px-4.text-left = date
-        td.border.px-4.text-right Total Earnings
         td.border.px-4.text-right = total
         td.border.px-4.text-right = form_with url: orders_path, method: :get do |f|
           = f.hidden_field :date, value: date

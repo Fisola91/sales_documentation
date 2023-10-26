@@ -18,7 +18,6 @@ RSpec.describe "Sales per day", type: :system do
     within ("#all-sales-table thead tr") do
       expect(page).to have_content("Date")
       expect(page).to have_content("Earnings")
-      expect(page).to have_content("Total amount")
       expect(page).to have_content("See details")
     end
   end
