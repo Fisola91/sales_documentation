@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
 
     total = quantity * unit_price
     order_params = safe_params.merge(total: total)
-    
+
     if order.update(order_params)
       redirect_to orders_url
     else
@@ -74,7 +74,7 @@ class OrdersController < ApplicationController
     order = Order.find(params[:id])
     order.destroy
     respond_to do |format|
-      format.turbo_stream do 
+      format.turbo_stream do
         render turbo_stream: turbo_stream.replace(
           "summary-table",
           SummaryTable.new(orders: all_orders)
@@ -91,8 +91,5 @@ class OrdersController < ApplicationController
 
   def all_orders
     @all_orders ||= Order.order(created_at: :asc)
-  end
-
-  def date_format
   end
 end
