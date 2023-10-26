@@ -18,6 +18,12 @@ class SummaryTable < ViewComponent::Base
     total_quantity
   end
 
+  def date_caption
+    date_time_str = orders.first.created_at.to_s
+    date_time = DateTime.parse(date_time_str)
+    date_str = date_time.strftime("%Y-%m-%d")
+  end
+
   attr_reader :orders, :show
 
   def show_class

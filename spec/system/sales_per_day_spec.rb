@@ -43,12 +43,15 @@ RSpec.describe "Sales per day", type: :system do
 
       within all("#all-sales-table tbody tr").first do
         expect(page).to have_content('2023-10-22')
-        expect(page).to have_button("click")
+        expect(page).to have_button("see details")
 
-        click_button "click"
+        click_button "see details"
       end
-      within all("#summary-table tbody tr").first do
+      within ("#summary-table caption") do
         expect(page).to have_content('2023-10-22')
+      end
+      
+      within all("#summary-table tbody tr").first do
         expect(page).to have_content('10.0')
         expect(page).to have_content('2.0')
         expect(page).to have_content('20.0')
