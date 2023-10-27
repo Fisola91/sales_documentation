@@ -1,0 +1,25 @@
+name: CI
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Prepare Tailwind assets
+        run: bin/rails test:prepare test
+      - name: Run tests
+        run: bundle exec rspec
+      - name: Archive screenshots on failure
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: sales-documentation-ci-${{ github.run_id }}-screenshots
+          path: tmp/capybara/*.png
