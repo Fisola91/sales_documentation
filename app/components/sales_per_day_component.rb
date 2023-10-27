@@ -11,10 +11,8 @@ class SalesPerDayComponent < ViewComponent::Base
     end
   end
 
-  def sales_per_day_total(values)
-    values.reduce(0) do |sum, hash|
-      sum.to_f + hash[:total]
-    end
+  def sales_per_day_total(day_orders)
+    day_orders.sum { |order| order[:total] }
   end
 
   attr_reader :orders
