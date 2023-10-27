@@ -32,6 +32,7 @@ group :test do
   gem "capybara"
   gem "simplecov"
   gem "selenium-webdriver", "~> 4.14"
+  gem "timecop"
 end
 
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]

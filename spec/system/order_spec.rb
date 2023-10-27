@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Order management', type: :system do
   before do
     visit '/'
+    @current_time = Time.local(2022, 12, 1, 10, 5, 0)
   end
 
   it 'displays the initial state of the page' do
@@ -21,20 +22,18 @@ RSpec.describe 'Order management', type: :system do
       find_field('Unit price').send_keys(:tab)
       expect(page).to have_field('Total', with: '20.00', disabled: true)
       
-      click_button "Save"
-      expect(find("#summary-table tbody")).to have_css("tr", count: 1)
-  
+      Timecop.freeze(@current_time) do
+        click_button "Save"
+        expect(find("#summary-table tbody")).to have_css("tr", count: 1)
+      end
+
       expect(page).to have_field("Name", text: "")
       expect(page).to have_field("Quantity", text: "")
       expect(page).to have_field("Unit price", text: "")
       expect(page).to have_field("Total", text: "", disabled: true)
 
-      date_time_str = Order.first.created_at.to_s
-      date_time = DateTime.parse(date_time_str)
-      date_str = date_time.strftime("%Y-%m-%d")
-
       within ("#summary-table caption") do
-        expect(page).to have_content(date_str)
+        expect(page).to have_content("2022-12-01")
       end
       
       within ("#summary-table tbody tr") do
@@ -59,16 +58,14 @@ RSpec.describe 'Order management', type: :system do
       fill_in 'Unit price', with: 2
       find_field('Unit price').send_keys(:tab)
       expect(page).to have_field('Total', with: '20.00', disabled: true)
-      
-      click_button "Save"
-      expect(find("#summary-table tbody")).to have_css("tr", count: 1)
 
-      date_time_str = Order.first.created_at.to_s
-      date_time = DateTime.parse(date_time_str)
-      date_str = date_time.strftime("%Y-%m-%d")
+      Timecop.freeze(@current_time) do
+        click_button "Save"
+        expect(find("#summary-table tbody")).to have_css("tr", count: 1)
+      end
 
       within ("#summary-table caption") do
-        expect(page).to have_content(date_str)
+        expect(page).to have_content("2022-12-01")
       end
         
       within ("#summary-table tbody tr") do
@@ -89,12 +86,8 @@ RSpec.describe 'Order management', type: :system do
       click_button "Save"
       expect(find("#summary-table tbody")).to have_css("tr", count: 2)
 
-      date_time_str = Order.first.created_at.to_s
-      date_time = DateTime.parse(date_time_str)
-      date_str = date_time.strftime("%Y-%m-%d")
-
       within ("#summary-table caption") do
-        expect(page).to have_content(date_str)
+        expect(page).to have_content("2022-12-01")
       end
 
       within all("#summary-table tbody tr").first do
@@ -129,45 +122,43 @@ RSpec.describe 'Order management', type: :system do
       find_field("Unit price").send_keys(:tab)
       expect(page).to have_field("Total", with: "20.00", disabled: true)
 
-      click_button "Save"
+      Timecop.freeze(@current_time) do
+        click_button "Save"
 
-      within ("#summary-table tbody tr") do
-        expect(page).to have_content("Product A")
-        expect(page).to have_content("10.0")
-        expect(page).to have_content("2.0")
-        expect(page).to have_content("20.0")
-        expect(page).to have_link("edit")
-        expect(page).to have_link("delete")
-      end
+        within ("#summary-table tbody tr") do
+          expect(page).to have_content("Product A")
+          expect(page).to have_content("10.0")
+          expect(page).to have_content("2.0")
+          expect(page).to have_content("20.0")
+          expect(page).to have_link("edit")
+          expect(page).to have_link("delete")
+        end
 
-      within ("#summary-table tfoot tr") do
-        expect(page).to have_content("Total")
-        expect(page).to have_content("10.0")
-        expect(page).to have_content("20.0")
-      end
-      
-      within ("#summary-table tbody tr") do
-        click_link "edit"
-      end
+        within ("#summary-table tfoot tr") do
+          expect(page).to have_content("Total")
+          expect(page).to have_content("10.0")
+          expect(page).to have_content("20.0")
+        end
 
-      expect(page).to have_field("Name", with: "Product A")
-      expect(page).to have_field("Quantity", with: "10.0")
-      expect(page).to have_field("Unit price", with: "2.0")
-      expect(page).to have_field("Total", with: "20.0", disabled: true)
+        within ("#summary-table tbody tr") do
+          click_link "edit"
+        end
 
-      fill_in "Name", with: "Product C"
-      fill_in "Unit price", with: 3
-      find_field("Unit price").send_keys(:tab)
-      expect(page).to have_field("Total", with: "30.00", disabled: true)
+        expect(page).to have_field("Name", with: "Product A")
+        expect(page).to have_field("Quantity", with: "10.0")
+        expect(page).to have_field("Unit price", with: "2.0")
+        expect(page).to have_field("Total", with: "20.0", disabled: true)
 
-      click_button "Update"
+        fill_in "Name", with: "Product C"
+        fill_in "Unit price", with: 3
+        find_field("Unit price").send_keys(:tab)
+        expect(page).to have_field("Total", with: "30.00", disabled: true)
 
-      date_time_str = Order.first.created_at.to_s
-      date_time = DateTime.parse(date_time_str)
-      date_str = date_time.strftime("%Y-%m-%d")
+        click_button "Update"
 
-      within ("#summary-table caption") do
-        expect(page).to have_content(date_str)
+        within ("#summary-table caption") do
+          expect(page).to have_content("2022-12-01")
+        end
       end
 
       within ("#summary-table tbody tr") do
