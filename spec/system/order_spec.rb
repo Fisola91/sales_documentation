@@ -23,11 +23,19 @@ RSpec.describe 'Order management', type: :system do
       
       click_button "Save"
       expect(find("#summary-table tbody")).to have_css("tr", count: 1)
-
+  
       expect(page).to have_field("Name", text: "")
       expect(page).to have_field("Quantity", text: "")
       expect(page).to have_field("Unit price", text: "")
       expect(page).to have_field("Total", text: "", disabled: true)
+
+      date_time_str = Order.first.created_at.to_s
+      date_time = DateTime.parse(date_time_str)
+      date_str = date_time.strftime("%Y-%m-%d")
+
+      within ("#summary-table caption") do
+        expect(page).to have_content(date_str)
+      end
       
       within ("#summary-table tbody tr") do
         expect(page).to have_content("Product A")
@@ -54,6 +62,14 @@ RSpec.describe 'Order management', type: :system do
       
       click_button "Save"
       expect(find("#summary-table tbody")).to have_css("tr", count: 1)
+
+      date_time_str = Order.first.created_at.to_s
+      date_time = DateTime.parse(date_time_str)
+      date_str = date_time.strftime("%Y-%m-%d")
+
+      within ("#summary-table caption") do
+        expect(page).to have_content(date_str)
+      end
         
       within ("#summary-table tbody tr") do
         expect(page).to have_content("Product C")
@@ -72,6 +88,14 @@ RSpec.describe 'Order management', type: :system do
       
       click_button "Save"
       expect(find("#summary-table tbody")).to have_css("tr", count: 2)
+
+      date_time_str = Order.first.created_at.to_s
+      date_time = DateTime.parse(date_time_str)
+      date_str = date_time.strftime("%Y-%m-%d")
+
+      within ("#summary-table caption") do
+        expect(page).to have_content(date_str)
+      end
 
       within all("#summary-table tbody tr").first do
         expect(page).to have_content("Product C")
@@ -137,6 +161,14 @@ RSpec.describe 'Order management', type: :system do
       expect(page).to have_field("Total", with: "30.00", disabled: true)
 
       click_button "Update"
+
+      date_time_str = Order.first.created_at.to_s
+      date_time = DateTime.parse(date_time_str)
+      date_str = date_time.strftime("%Y-%m-%d")
+
+      within ("#summary-table caption") do
+        expect(page).to have_content(date_str)
+      end
 
       within ("#summary-table tbody tr") do
         expect(page).to have_content("Product C")

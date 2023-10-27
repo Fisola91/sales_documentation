@@ -1,0 +1,14 @@
+table#all-sales-table.w-full.border-collapse.my-4
+  thead
+    tr
+      th.border.px-4.text-left Date
+      th.border.px-4.text-right Earnings
+      th.border.px-4.text-right See details
+  tbody
+  - grouped_by_date.each do |date, values|
+    tr
+      td.border.px-4.text-left = date
+      td.border.px-4.text-right = sales_per_day_total(values)
+      td.border.px-4.text-right = form_with url: orders_path, method: :get do |f|
+        = f.hidden_field :date, value: date
+        = f.submit "see details", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline"
