@@ -4,8 +4,25 @@ on: [push]
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14.2
+        env:
+          POSTGRES_USER: postgres_u
+          POSTGRES_PASSWORD: postgres_p
+        ports:
+          - 5432:5432
+        options: >-
+          --mount type=tmpfs,destination=/var/lib/postgresql/data
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     env:
       RAILS_ENV: test
+      POSTGRES_USER: postgres_u
+      POSTGRES_PASSWORD: postgres_p
+      POSTGRES_HOST: localhost
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -13,8 +30,12 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - name: Install non-gem dependencies
+        run: sudo apt-get install libpq-dev
+      - name: Create DB
+        run: bin/rails db:create db:schema:load
       - name: Prepare Tailwind assets
-        run: bin/rails test:prepare test
+        run: bin/rails tailwindcss:build
       - name: Run tests
         run: bundle exec rspec
       - name: Archive screenshots on failure
@@ -23,3 +44,9 @@ jobs:
         with:
           name: sales-documentation-ci-${{ github.run_id }}-screenshots
           path: tmp/capybara/*.png
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-result-branch-${{ github.run_id }}
+          path: coverage/.resultset.json
