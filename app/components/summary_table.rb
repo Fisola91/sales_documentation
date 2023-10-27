@@ -1,7 +1,6 @@
 class SummaryTable < ViewComponent::Base
-  def initialize(orders: [], show: true)
+  def initialize(orders: [])
     @orders = orders
-    @show = show
   end
 
   def grand_total
@@ -26,10 +25,10 @@ class SummaryTable < ViewComponent::Base
     end
   end
 
-  attr_reader :orders, :show
+  attr_reader :orders
 
   def show_class
-    if show
+    if orders.any?
       ""
     else
       "hidden"

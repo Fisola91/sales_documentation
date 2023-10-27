@@ -4,15 +4,9 @@ class OrdersController < ApplicationController
     if params["date"]
       date = Date.parse(params["date"])
       orders = Order.created_on(date)
-      @summary = SummaryTable.new(
-        orders: orders,
-        show: all_orders.any?
-      )
+      @summary = SummaryTable.new(orders: orders)
     else
-      @summary = SummaryTable.new(
-        orders: all_orders,
-        show: all_orders.any?
-      )
+      @summary = SummaryTable.new(orders: all_orders)
     end
   end
 
@@ -49,10 +43,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @form = OrderForm.new(order: @order)
 
-    @summary = SummaryTable.new(
-      orders: all_orders,
-      show: all_orders.any?
-    )
+    @summary = SummaryTable.new(orders: all_orders)
   end
 
   def update
