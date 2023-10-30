@@ -178,7 +178,7 @@ RSpec.describe 'Order management', type: :system do
     end
 
     fit "shows only information of a selected date" do
-      fill_in "date", with: "2022-12-01"
+      set_date element_id: "date", date: "2022-12-01"
       fill_in 'Name', with: 'Product A'
       fill_in 'Quantity', with: 10
       fill_in 'Unit price', with: 2
