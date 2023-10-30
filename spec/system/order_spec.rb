@@ -16,6 +16,7 @@ RSpec.describe 'Order management', type: :system do
 
   context "when form input and submission" do
     it 'resets the form & calculates the total and total sum row' do
+      set_date element_id: "date", date: "2022-12-01"
       fill_in 'Name', with: 'Product A'
       fill_in 'Quantity', with: 10
       fill_in 'Unit price', with: 2
@@ -53,6 +54,7 @@ RSpec.describe 'Order management', type: :system do
     end
 
     it 'calculates the total and total sum rows' do
+      set_date element_id: "date", date: "2022-12-01"
       fill_in 'Name', with: 'Product C'
       fill_in 'Quantity', with: 10
       fill_in 'Unit price', with: 2
@@ -116,6 +118,7 @@ RSpec.describe 'Order management', type: :system do
     end
 
     it "edits and updates the product information" do
+      set_date element_id: "date", date: "2022-12-01"
       fill_in "Name", with: "Product A"
       fill_in "Quantity", with: 10
       fill_in "Unit price", with: 2
