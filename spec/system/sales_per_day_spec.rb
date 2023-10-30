@@ -11,10 +11,10 @@ RSpec.describe "Sales per day", type: :system do
   it "displays page table headings" do
     visit '/'
     expect(page).to have_link("all sales")
-    
+
     click_link "all sales"
     expect(page).to have_content("ALL SALES PER DAY")
-   
+
     within ("#all-sales-table thead tr") do
       expect(page).to have_content("Date")
       expect(page).to have_content("Earnings")
@@ -50,7 +50,7 @@ RSpec.describe "Sales per day", type: :system do
       within ("#summary-table caption") do
         expect(page).to have_content('2023-10-22')
       end
-      
+
       within all("#summary-table tbody tr").first do
         expect(page).to have_content('10.0')
         expect(page).to have_content('2.0')

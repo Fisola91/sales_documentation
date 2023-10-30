@@ -21,7 +21,7 @@ RSpec.describe 'Order management', type: :system do
       fill_in 'Unit price', with: 2
       find_field('Unit price').send_keys(:tab)
       expect(page).to have_field('Total', with: '20.00', disabled: true)
-      
+
       Timecop.freeze(@current_time) do
         click_button "Save"
         expect(find("#summary-table tbody")).to have_css("tr", count: 1)
@@ -35,7 +35,7 @@ RSpec.describe 'Order management', type: :system do
       within ("#summary-table caption") do
         expect(page).to have_content("2022-12-01")
       end
-      
+
       within ("#summary-table tbody tr") do
         expect(page).to have_content("Product A")
         expect(page).to have_content("10.0")
@@ -67,7 +67,7 @@ RSpec.describe 'Order management', type: :system do
       within ("#summary-table caption") do
         expect(page).to have_content("2022-12-01")
       end
-        
+
       within ("#summary-table tbody tr") do
         expect(page).to have_content("Product C")
         expect(page).to have_content("10.0")
@@ -82,7 +82,7 @@ RSpec.describe 'Order management', type: :system do
       fill_in 'Unit price', with: 3
       find_field('Unit price').send_keys(:tab)
       expect(page).to have_field('Total', with: '30.00', disabled: true)
-      
+
       click_button "Save"
       expect(find("#summary-table tbody")).to have_css("tr", count: 2)
 
@@ -174,6 +174,39 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("Total")
         expect(page).to have_content("10.0")
         expect(page).to have_content("30.0")
+      end
+    end
+
+    fit "shows only information of a selected date" do
+      fill_in "date", with: "2022-12-01"
+      fill_in 'Name', with: 'Product A'
+      fill_in 'Quantity', with: 10
+      fill_in 'Unit price', with: 2
+      find_field('Unit price').send_keys(:tab)
+      expect(page).to have_field('Total', with: '20.00', disabled: true)
+
+      Timecop.freeze(@current_time) do
+        click_button "Save"
+        expect(find("#summary-table tbody")).to have_css("tr", count: 1)
+      end
+
+      within ("#summary-table caption") do
+        expect(page).to have_content("2022-12-01")
+      end
+
+      within ("#summary-table tbody tr") do
+        expect(page).to have_content("Product A")
+        expect(page).to have_content("10.0")
+        expect(page).to have_content("2.0")
+        expect(page).to have_content("20.0")
+        expect(page).to have_link("edit")
+        expect(page).to have_link("delete")
+      end
+
+      within ("#summary-table tfoot tr") do
+        expect(page).to have_content("Total")
+        expect(page).to have_content("10")
+        expect(page).to have_content("20")
       end
     end
   end

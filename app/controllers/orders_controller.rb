@@ -1,12 +1,13 @@
 class OrdersController < ApplicationController
   def index
+    date = Date.today
     @form = OrderForm.new
     if params["date"]
       date = Date.parse(params["date"])
       orders = Order.created_on(date)
       @summary = SummaryTable.new(orders: orders)
     else
-      @summary = SummaryTable.new(orders: all_orders)
+      @summary = SummaryTable.new(orders: all_orders(date))
     end
   end
 
@@ -14,8 +15,9 @@ class OrdersController < ApplicationController
     quantity = safe_params.fetch(:quantity).to_f
     unit_price = safe_params.fetch(:unit_price).to_f
 
+    created_date = params["date"]
     total = quantity * unit_price
-    order_params = safe_params.merge(total: total)
+    order_params = safe_params.merge(total: total, created_at: created_date)
 
     order = Order.new(order_params)
 
@@ -25,7 +27,7 @@ class OrdersController < ApplicationController
           render turbo_stream: [
             turbo_stream.replace(
               "summary-table",
-              SummaryTable.new(orders: all_orders)
+              SummaryTable.new(orders: all_orders(order.created_at))
             ),
             turbo_stream.replace(
               "form",
@@ -80,7 +82,7 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:name, :quantity, :unit_price)
   end
 
-  def all_orders
-    @all_orders ||= Order.order(created_at: :asc)
+  def all_orders(date)
+    @all_orders ||= Order.created_on(date)#order(created_at: :asc)
   end
 end
