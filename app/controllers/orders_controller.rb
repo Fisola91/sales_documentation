@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
             ),
             turbo_stream.replace(
               "form",
-              OrderForm.new
+              OrderForm.new(date: order.created_at)
             )
           ]
         end
