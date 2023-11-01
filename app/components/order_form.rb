@@ -1,5 +1,5 @@
 class OrderForm < ViewComponent::Base
-  def initialize(order: nil)
+  def initialize(order: nil, date: nil)
     @order = order
   end
 
@@ -19,5 +19,9 @@ class OrderForm < ViewComponent::Base
     order ? "Update" : "Save"
   end
 
-  attr_reader :order
+  def created_date
+    date.nil? ? Date.today.strftime('%Y-%m-%d') : date.strftime('%Y-%m-%d')
+  end
+
+  attr_reader :order, :date
 end
