@@ -1,6 +1,7 @@
 class OrderForm < ViewComponent::Base
   def initialize(order: nil, date: nil)
     @order = order
+    @date = date
   end
 
   def form_method

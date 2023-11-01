@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
     if params["date"]
       date = Date.parse(params["date"])
       orders = Order.created_on(date)
+      @form = OrderForm.new(date: orders.first.created_at)
       @summary = SummaryTable.new(orders: orders)
     else
       @summary = SummaryTable.new(orders: all_orders(date))
