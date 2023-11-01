@@ -11,10 +11,10 @@ RSpec.describe "Sales per day", type: :system do
   it "displays page table headings" do
     visit '/'
     expect(page).to have_link("all sales")
-    
+
     click_link "all sales"
     expect(page).to have_content("ALL SALES PER DAY")
-   
+
     within ("#all-sales-table thead tr") do
       expect(page).to have_content("Date")
       expect(page).to have_content("Earnings")
@@ -35,32 +35,39 @@ RSpec.describe "Sales per day", type: :system do
       end
     end
 
-    it "clicks to see detail information for a specific date" do
-      visit '/'
-      expect(page).to have_link("all sales")
+    context "when click on see details button" do
+      it "displays table information and change the date picker to the specific date" do
+        visit '/'
+        expect(page).to have_link("all sales")
 
-      click_link "all sales"
+        click_link "all sales"
 
-      within all("#all-sales-table tbody tr").first do
-        expect(page).to have_content('2023-10-22')
-        expect(page).to have_button("see details")
+        within all("#all-sales-table tbody tr").first do
+          expect(page).to have_content('2023-10-22')
+          expect(page).to have_button("see details")
 
-        click_button "see details"
-      end
-      within ("#summary-table caption") do
-        expect(page).to have_content('2023-10-22')
-      end
-      
-      within all("#summary-table tbody tr").first do
-        expect(page).to have_content('10.0')
-        expect(page).to have_content('2.0')
-        expect(page).to have_content('20.0')
-      end
+          click_button "see details"
+        end
 
-      within ("#summary-table tfoot tr") do
-        expect(page).to have_content("Total")
-        expect(page).to have_content("50.0")
-        expect(page).to have_content("100.0")
+        within ("#form") do
+          set_date element_id: "date", date: '2023-10-22'
+        end
+
+        within ("#summary-table caption") do
+          expect(page).to have_content('2023-10-22')
+        end
+
+        within all("#summary-table tbody tr").first do
+          expect(page).to have_content('10.0')
+          expect(page).to have_content('2.0')
+          expect(page).to have_content('20.0')
+        end
+
+        within ("#summary-table tfoot tr") do
+          expect(page).to have_content("Total")
+          expect(page).to have_content("50.0")
+          expect(page).to have_content("100.0")
+        end
       end
     end
   end
