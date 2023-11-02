@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
-    @form = OrderForm.new(order: @order)
+    @form = OrderForm.new(order: @order, date: @order.created_at)
 
     @summary = SummaryTable.new(orders: all_orders(@order.created_at))
   end

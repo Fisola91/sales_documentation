@@ -147,6 +147,10 @@ RSpec.describe 'Order management', type: :system do
           click_link "edit"
         end
 
+        within ("#form") do
+          set_date element_id: "date", date: "2022-12-01"
+        end
+
         expect(page).to have_field("Name", with: "Product A")
         expect(page).to have_field("Quantity", with: "10.0")
         expect(page).to have_field("Unit price", with: "2.0")
