@@ -127,7 +127,6 @@ RSpec.describe 'Order management', type: :system do
 
       Timecop.freeze(@current_time) do
         click_button "Save"
-
         within ("#summary-table tbody tr") do
           expect(page).to have_content("Product A")
           expect(page).to have_content("10.0")
@@ -163,6 +162,8 @@ RSpec.describe 'Order management', type: :system do
           expect(page).to have_content("2022-12-01")
         end
       end
+
+
 
       within ("#summary-table tbody tr") do
         expect(page).to have_content("Product C")

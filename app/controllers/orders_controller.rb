@@ -3,8 +3,7 @@ class OrdersController < ApplicationController
     date = Date.today
     @form = OrderForm.new
     if params["date"]
-      date = Date.parse(params["date"])
-      orders = Order.created_on(date)
+      orders = all_orders(params["date"])
       @form = OrderForm.new(date: orders.first.created_at)
       @summary = SummaryTable.new(orders: orders)
     else
@@ -13,14 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    quantity = safe_params.fetch(:quantity).to_f
-    unit_price = safe_params.fetch(:unit_price).to_f
-
-    created_date = params["date"]
-    total = quantity * unit_price
-    order_params = safe_params.merge(total: total, created_at: created_date)
-
-    order = Order.new(order_params)
+    order = OrderManager.new(params).create_order
 
     if order.save
       respond_to do |format|
@@ -51,11 +43,7 @@ class OrdersController < ApplicationController
 
   def update
     order = Order.find(params[:id])
-    quantity = params.dig(:order, :quantity).to_f
-    unit_price = params.dig(:order, :unit_price).to_f
-
-    total = quantity * unit_price
-    order_params = safe_params.merge(total: total)
+    order_params = OrderManager.new(params).update_order
 
     if order.update(order_params)
       redirect_to orders_url
@@ -79,11 +67,11 @@ class OrdersController < ApplicationController
 
   private
 
-  def safe_params
-    params.require(:order).permit(:name, :quantity, :unit_price)
-  end
-
   def all_orders(date)
     @all_orders ||= Order.created_on(date).order(created_at: :asc)
+  end
+
+  def updated_all_order
+    @all_orders ||= Order.order(updated_at: :desc)
   end
 end
