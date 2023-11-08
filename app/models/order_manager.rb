@@ -4,9 +4,6 @@ class OrderManager
   end
 
   def create_order
-    quantity
-    unit_price
-
     created_date = params["date"]
     order_params = safe_params.merge(total: total, created_at: created_date)
 
@@ -14,9 +11,6 @@ class OrderManager
   end
 
   def update_order
-    quantity
-    unit_price
-
     order_params = safe_params.merge(total: total)
   end
 
