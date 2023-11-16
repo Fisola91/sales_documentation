@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "Sales per day", type: :system do
   before do
-    create_list(:order, 5, created_at: '2023-10-22')
-    create_list(:order, 5, created_at: '2023-10-23')
-    create_list(:order, 5, created_at: '2023-10-24')
-    create_list(:order, 5, created_at: '2023-10-25')
+    create_list(:order, 5, date: '2023-10-22')
+    create_list(:order, 5, date: '2023-10-23')
+    create_list(:order, 5, date: '2023-10-24')
+    create_list(:order, 5, date: '2023-10-25')
   end
 
   it "displays page table headings" do
@@ -50,7 +50,7 @@ RSpec.describe "Sales per day", type: :system do
         end
 
         within ("#form") do
-          set_date element_id: "date", date: '2023-10-22'
+          expect(page).to have_field("date", with: '2023-10-22')
         end
 
         within ("#summary-table caption") do

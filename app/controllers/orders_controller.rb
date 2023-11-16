@@ -1,24 +1,20 @@
 class OrdersController < ApplicationController
   def index
-    date = Date.today
-    @form = OrderForm.new
-    if params["date"]
-      date = Date.parse(params["date"])
-      orders = Order.created_on(date)
-      @form = OrderForm.new(date: orders.first.created_at)
-      @summary = SummaryTable.new(orders: orders)
-    else
-      @summary = SummaryTable.new(orders: all_orders(date))
-    end
+    selected_date = date_from_see_details_params || Date.today
+
+    orders = all_orders(selected_date)
+
+    @form = order_form(orders)
+    @summary = SummaryTable.new(orders: orders)
   end
 
   def create
     quantity = safe_params.fetch(:quantity).to_f
     unit_price = safe_params.fetch(:unit_price).to_f
 
-    created_date = params["date"]
     total = quantity * unit_price
-    order_params = safe_params.merge(total: total, created_at: created_date)
+
+    order_params = safe_params.merge(total: total)
 
     order = Order.new(order_params)
 
@@ -28,11 +24,11 @@ class OrdersController < ApplicationController
           render turbo_stream: [
             turbo_stream.replace(
               "summary-table",
-              SummaryTable.new(orders: all_orders(order.created_at))
+              SummaryTable.new(orders: all_orders(date_from_order_params))
             ),
             turbo_stream.replace(
               "form",
-              OrderForm.new(date: order.created_at)
+              OrderForm.new(date: date_from_order_params)
             )
           ]
         end
@@ -80,10 +76,26 @@ class OrdersController < ApplicationController
   private
 
   def safe_params
-    params.require(:order).permit(:name, :quantity, :unit_price)
+    params.require(:order).permit(:name, :quantity, :unit_price, :date)
+  end
+
+  def date_from_order_params
+    safe_params.fetch(:date)
+  end
+
+  def date_from_see_details_params
+    params["date"]
+  end
+
+  def order_form(orders)
+    date_from_see_details_params ? OrderForm.new(date: date_str_format(orders)) : OrderForm.new
+  end
+
+  def date_str_format(orders)
+    orders.first.date.strftime("%Y-%m-%d")
   end
 
   def all_orders(date)
-    @all_orders ||= Order.created_on(date).order(created_at: :asc)
+    @all_orders ||= Order.created_on(date).order(date: :asc)
   end
 end

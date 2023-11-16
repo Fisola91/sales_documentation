@@ -7,6 +7,6 @@ class SalesPerDayController < ApplicationController
   private
 
   def all_orders
-    @all_orders ||= Order.order(created_at: :asc)
+    @all_orders ||= Order.order(date: :asc)
   end
 end

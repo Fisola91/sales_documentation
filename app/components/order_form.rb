@@ -21,7 +21,7 @@ class OrderForm < ViewComponent::Base
   end
 
   def created_date
-    date.nil? ? Date.today.strftime('%Y-%m-%d') : date.strftime('%Y-%m-%d')
+    date.nil? ? Date.today.strftime('%Y-%m-%d') : date
   end
 
   attr_reader :order, :date

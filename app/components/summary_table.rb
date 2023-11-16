@@ -15,7 +15,7 @@ class SummaryTable < ViewComponent::Base
     if orders.empty?
       nil
     else
-      orders.first.created_at.strftime("%Y-%m-%d")
+      orders.first.date.strftime("%Y-%m-%d")
     end
   end
 
