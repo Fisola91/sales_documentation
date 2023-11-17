@@ -9,14 +9,12 @@ class OrdersController < ApplicationController
   end
 
   def create
-    quantity = safe_params.fetch(:quantity).to_f
-    unit_price = safe_params.fetch(:unit_price).to_f
-
-    total = quantity * unit_price
-
-    order_params = safe_params.merge(total: total)
-
-    order = Order.new(order_params)
+    order = OrderManager.new(
+      date: date_from_order_params,
+      name: name,
+      quantity: quantity,
+      unit_price: unit_price,
+    ).create_order
 
     if order.save
       respond_to do |format|
@@ -81,6 +79,18 @@ class OrdersController < ApplicationController
 
   def date_from_order_params
     safe_params.fetch(:date)
+  end
+
+  def name
+    safe_params.fetch(:name)
+  end
+
+  def quantity
+    safe_params.fetch(:quantity).to_f
+  end
+
+  def unit_price
+    safe_params.fetch(:unit_price).to_f
   end
 
   def date_from_see_details_params
