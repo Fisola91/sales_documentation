@@ -14,7 +14,7 @@ class OrderManager
       quantity: quantity,
       unit_price: unit_price,
       total: total
-    )
+    ).save
   end
 
   def update_order

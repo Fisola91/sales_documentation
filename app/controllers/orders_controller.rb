@@ -9,14 +9,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    order = OrderManager.new(
-      date: date_from_order_params,
-      name: name,
-      quantity: quantity,
-      unit_price: unit_price,
-    ).create_order
-
-    if order.save
+    if order_manager.create_order
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: [
@@ -45,15 +38,8 @@ class OrdersController < ApplicationController
 
   def update
     order = Order.find(params[:id])
-    order_manager = OrderManager.new(
-      order: order,
-      date: date_from_order_params,
-      name: name,
-      quantity: quantity,
-      unit_price: unit_price,
-    )
 
-    if order_manager.update_order
+    if order_manager(order).update_order
       redirect_to orders_url
     else
       render :edit
@@ -100,11 +86,29 @@ class OrdersController < ApplicationController
   end
 
   def order_form(orders)
-    date_from_see_details_params ? OrderForm.new(date: date_str_format(orders)) : OrderForm.new
+    if date_from_see_details_params
+      OrderForm.new(date: date_str_format(orders))
+    else
+      OrderForm.new
+    end
   end
 
   def date_str_format(orders)
     orders.first.date.strftime("%Y-%m-%d")
+  end
+
+  def order_manager(order = nil)
+    @order_manager ||= construct_order_manager_for(order)
+  end
+
+  def construct_order_manager_for(order = nil)
+    OrderManager.new(
+      order: order,
+      date: date_from_order_params,
+      name: name,
+      quantity: quantity,
+      unit_price: unit_price,
+    )
   end
 
   def all_orders(date)
