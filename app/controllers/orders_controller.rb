@@ -45,13 +45,15 @@ class OrdersController < ApplicationController
 
   def update
     order = Order.find(params[:id])
-    quantity = params.dig(:order, :quantity).to_f
-    unit_price = params.dig(:order, :unit_price).to_f
+    order_manager = OrderManager.new(
+      order: order,
+      date: date_from_order_params,
+      name: name,
+      quantity: quantity,
+      unit_price: unit_price,
+    )
 
-    total = quantity * unit_price
-    order_params = safe_params.merge(total: total)
-
-    if order.update(order_params)
+    if order_manager.update_order
       redirect_to orders_url
     else
       render :edit
