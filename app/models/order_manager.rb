@@ -1,5 +1,5 @@
 class OrderManager
-  def initialize(order:nil, date:, name:, quantity:, unit_price:)
+  def initialize(order:, date:, name:, quantity:, unit_price:)
     @order = order
     @date = date
     @name = name
