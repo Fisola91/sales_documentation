@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
     orders = all_orders(selected_date)
 
-    @form = order_form(orders)
+    @form = order_form(selected_date)
     @summary = SummaryTable.new(orders: orders)
   end
 
@@ -85,16 +85,12 @@ class OrdersController < ApplicationController
     params["date"]
   end
 
-  def order_form(orders)
+  def order_form(date)
     if date_from_see_details_params
-      OrderForm.new(date: date_str_format(orders))
+      OrderForm.new(date: date)
     else
-      OrderForm.new
+      OrderForm.new(date: date.strftime("%Y-%m-%d"))
     end
-  end
-
-  def date_str_format(orders)
-    orders.first.date.strftime("%Y-%m-%d")
   end
 
   def order_manager(order = nil)
