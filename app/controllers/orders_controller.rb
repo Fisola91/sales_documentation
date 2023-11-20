@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
     orders = all_orders(selected_date)
 
-    @form = order_form(selected_date)
+    @form = NewOrderForm.new(order: Order.new(date: selected_date))
     @summary = SummaryTable.new(orders: orders)
   end
 
@@ -15,11 +15,11 @@ class OrdersController < ApplicationController
           render turbo_stream: [
             turbo_stream.replace(
               "summary-table",
-              SummaryTable.new(orders: all_orders(date_from_order_params))
+              SummaryTable.new(orders: all_orders(date_from_params))
             ),
             turbo_stream.replace(
               "form",
-              OrderForm.new(date: date_from_order_params)
+              NewOrderForm.new(order: Order.new(date: date_from_params))
             )
           ]
         end
@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
-    @form = OrderForm.new(order: @order)
+    @form = EditOrderForm.new(order: @order)
 
     @summary = SummaryTable.new(orders: all_orders(@order.date))
   end
@@ -65,7 +65,7 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:name, :quantity, :unit_price, :date)
   end
 
-  def date_from_order_params
+  def date_from_params
     safe_params.fetch(:date)
   end
 
@@ -85,22 +85,10 @@ class OrdersController < ApplicationController
     params["date"]
   end
 
-  def order_form(date)
-    if date_from_see_details_params
-      OrderForm.new(date: date)
-    else
-      OrderForm.new(date: date.strftime("%Y-%m-%d"))
-    end
-  end
-
   def order_manager(order = nil)
-    @order_manager ||= construct_order_manager_for(order)
-  end
-
-  def construct_order_manager_for(order = nil)
-    OrderManager.new(
+    @order_manager ||= OrderManager.new(
       order: order,
-      date: date_from_order_params,
+      date: date_from_params,
       name: name,
       quantity: quantity,
       unit_price: unit_price,
