@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
   def index
-    selected_date = date_from_see_details_params || Date.today
+    if no_date_set?
+      return redirect_to orders_path(date: Date.today)
+    end
 
     orders = all_orders(selected_date)
 
@@ -30,10 +32,10 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @order = Order.find(params[:id])
-    @form = EditOrderForm.new(order: @order)
+    order = Order.find(params[:id])
 
-    @summary = SummaryTable.new(orders: all_orders(@order.date))
+    @form = EditOrderForm.new(order: order)
+    @summary = SummaryTable.new(orders: all_orders(order.date))
   end
 
   def update
@@ -53,13 +55,17 @@ class OrdersController < ApplicationController
       format.turbo_stream do
         render turbo_stream: turbo_stream.replace(
           "summary-table",
-          SummaryTable.new(orders: all_orders(order.created_at))
+          SummaryTable.new(orders: all_orders(order.date))
         )
       end
     end
   end
 
   private
+
+  def no_date_set?
+    selected_date.nil?
+  end
 
   def safe_params
     params.require(:order).permit(:name, :quantity, :unit_price, :date)
@@ -81,7 +87,7 @@ class OrdersController < ApplicationController
     safe_params.fetch(:unit_price).to_f
   end
 
-  def date_from_see_details_params
+  def selected_date
     params["date"]
   end
 
