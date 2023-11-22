@@ -7,6 +7,7 @@ RSpec.describe "Sales per day", type: :system do
     create_list(:order, 5, date: '2023-10-24')
     create_list(:order, 5, date: '2023-10-25')
   end
+  let(:today_date) { Date.today }
 
   it "displays page table headings" do
     visit '/'
@@ -29,9 +30,24 @@ RSpec.describe "Sales per day", type: :system do
 
       click_link "all sales"
       expect(page).to have_content("ALL SALES PER DAY")
+      expect(page).to have_link("Homepage")
 
       within ("#all-sales-table tbody") do
         expect(page).to have_content('2023-10-24')
+      end
+    end
+
+    it "returns back to the homepage" do
+      visit '/'
+      expect(page).to have_link("all sales")
+
+      click_link "all sales"
+      expect(page).to have_content("ALL SALES PER DAY")
+      expect(page).to have_link("Homepage")
+      click_link "Homepage"
+
+      within ("#form") do
+        expect(page).to have_field("date", with: today_date)
       end
     end
 
