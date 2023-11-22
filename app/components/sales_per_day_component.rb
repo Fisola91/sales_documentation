@@ -20,6 +20,6 @@ class SalesPerDayComponent < ViewComponent::Base
   private
 
   def date_format(order)
-    order.created_at.strftime("%Y-%m-%d")
+    order.date.strftime("%Y-%m-%d")
   end
 end
