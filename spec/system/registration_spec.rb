@@ -12,6 +12,6 @@ RSpec.describe "Registration", type: :system do
     allow(fake_client).to receive(:create).and_return(fake_credentials)
 
     fill_in "Username", with: "User1"
-    fill_in "Security Key nickname", with: "USB key"
+    fill_in "Security Key nickname", with: "nickname"
   end
 end
