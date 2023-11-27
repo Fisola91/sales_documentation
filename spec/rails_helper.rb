@@ -12,6 +12,7 @@ require "support/factory_bot"
 require "support/view_component"
 require "support/date_selector_helper"
 require "view_component/test_helpers"
+require "webauthn/fake_client"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
