@@ -1,8 +1,7 @@
-= form_with url: registration_path, scope: :registration, html: { class: "w-100", id: "new-registration"} do |f|
-  .mb-2
-    = f.text_field :username, class: "form-input mt-1 block w-full",autofocus: true, required: true, placeholder: "Username", tabindex: 1
-
-  .mb-2
+= form_with url: registration_path, scope: :registration, html: { class: "w-100", id: "new-registration"}, data: { controller: "new-registration", action: "ajax:success->new-registration#create" } do |f|
+  .mb-2 data-controller="textfield"
+    = f.text_field :username, class: "form-input mt-1 block w-full",autofocus: true, required: true, placeholder: "Username", tabindex: 1, data: { "new-registration-target": "usernameField"}
+  .mb-2 data-controller="textfield"
     = f.text_field :nickname, class: "form-input mt-1 block w-full", step: 1, min: 0, required: true, placeholder: "Security Key nickname", tabindex: 2
   .mt-4
     = f.submit "Register using WebAuthn", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline", tabindex: 4

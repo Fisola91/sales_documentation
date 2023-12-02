@@ -34,6 +34,7 @@ group :test do
   gem "simplecov"
   gem "selenium-webdriver", "~> 4.14"
   gem "timecop"
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
