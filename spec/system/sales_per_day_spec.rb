@@ -1,16 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe "Sales per day", type: :system do
+  let(:user) { create(:user) }
+
   before do
+    login_as user
+
     create_list(:order, 5, date: '2023-10-22')
     create_list(:order, 5, date: '2023-10-23')
     create_list(:order, 5, date: '2023-10-24')
     create_list(:order, 5, date: '2023-10-25')
   end
+
   let(:today_date) { Date.today }
 
   it "displays page table headings" do
-    visit '/'
+    visit orders_path
     expect(page).to have_link("all sales")
 
     click_link "all sales"
@@ -25,7 +30,7 @@ RSpec.describe "Sales per day", type: :system do
 
   context "when group by date" do
     it "shows total sum rows for different dates" do
-      visit '/'
+      visit orders_path
       expect(page).to have_link("all sales")
 
       click_link "all sales"
@@ -38,7 +43,7 @@ RSpec.describe "Sales per day", type: :system do
     end
 
     it "returns back to the homepage" do
-      visit '/'
+      visit orders_path
       expect(page).to have_link("all sales")
 
       click_link "all sales"
@@ -53,7 +58,7 @@ RSpec.describe "Sales per day", type: :system do
 
     context "when click on see details button" do
       it "displays table information and change the date picker to the specific date" do
-        visit '/'
+        visit orders_path
         expect(page).to have_link("all sales")
 
         click_link "all sales"

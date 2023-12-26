@@ -12,6 +12,7 @@ require "support/factory_bot"
 require "support/view_component"
 require "support/date_selector_helper"
 require "view_component/test_helpers"
+require "devise"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -66,6 +67,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  config.include Devise::Test::IntegrationHelpers, type: :system
 
   config.before(:example, type: :system) do
     driven_by(:selenium_chrome_headless)

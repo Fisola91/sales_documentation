@@ -11,6 +11,8 @@ html lang="en"
 
   body.m-0
     main
-      p.notice = notice
-      p.alert = alert
+      = render "devise/shared/navbar"
+      = render "devise/shared/flashes"
+      - if user_signed_in?
+        h2 Welcome, #{current_user.email}
       = yield

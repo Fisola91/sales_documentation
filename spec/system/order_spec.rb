@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Order management', type: :system do
+
   before do
-    visit '/'
+    visit orders_path
+
     @current_time = Time.local(2022, 12, 1, 10, 5, 0)
   end
 

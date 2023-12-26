@@ -249,6 +249,9 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (5.3.0)
       activesupport (>= 5.2.0)
+    simple_form (5.3.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -328,6 +331,7 @@ DEPENDENCIES
   rspec-rails (~> 6.0.3)
   selenium-webdriver (~> 4.14)
   shoulda-matchers (~> 5.0)
+  simple_form
   simplecov
   slim-rails (~> 3.6.1)
   sprockets-rails
