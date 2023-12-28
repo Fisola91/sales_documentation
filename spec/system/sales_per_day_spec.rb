@@ -92,4 +92,37 @@ RSpec.describe "Sales per day", type: :system do
       end
     end
   end
+
+  it "searches all sales by date range" do
+    visit orders_path
+
+    expect(page).to have_link("all sales")
+
+    click_link "all sales"
+
+    fill_in "date_range", with: "2023-10-23 - 2023-10-25"
+
+    click_on "Search"
+
+    expect(find_field('date_range').value).to eq("2023-10-23 - 2023-10-25")
+
+    within all("#all-sales-table tbody tr").first do
+      expect(page).to have_content('2023-10-23', wait: 5)
+      expect(page).to have_button("see details")
+    end
+
+    within all("#all-sales-table tbody tr")[1] do
+      expect(page).to have_content('2023-10-24', wait: 5)
+      expect(page).to have_button("see details")
+    end
+
+    within all("#all-sales-table tbody tr").last do
+      expect(page).to have_content('2023-10-25', wait: 5)
+      expect(page).to have_button("see details")
+    end
+
+    within all("#all-sales-table tbody tr").first do
+      expect(page).to_not have_content('2023-10-22', wait: 5)
+    end
+  end
 end
