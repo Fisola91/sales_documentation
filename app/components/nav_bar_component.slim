@@ -1,9 +1,10 @@
-- if user_signed_in
-  li.nav-item.active
-    = link_to 'Sign out', destroy_user_session_path, method: :delete, class: "nav-link bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline"
-- else
-  li.nav-item
-    = link_to "Login", new_user_session_path, class: "nav-link bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline"
-    = link_to "Register", new_user_registration_path, class: "nav-link bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline"
+.flex.justify-end.mt-4
+  - if user_signed_in
+    .nav-item.active
+      = link_to 'Sign out', destroy_user_session_path, method: :delete, class: "border border-blue-500 hover:bg-blue-300 mr-4 text-black font-normal py-2 px-4 w-full rounded-full focus:shadow-outline"
+  - else
+    .nav-item
+      = link_to "Login", new_user_session_path, class: "border border-blue-500 hover:bg-blue-300 mr-4 text-black font-normal py-2 px-4 w-full rounded-full focus:shadow-outline"
+      = link_to "Register", new_user_registration_path, class: "border border-blue-500 hover:bg-blue-300 mt-4 mr-4 text-black font-normal py-2 px-4 w-full rounded-full focus:shadow-outline"
 
 
