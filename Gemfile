@@ -15,6 +15,8 @@ gem "stimulus-rails"
 gem "tailwindcss-rails", "~> 2.0"
 gem "turbo-rails"
 gem "view_component"
+gem "devise"
+gem "simple_form"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
@@ -33,6 +35,7 @@ group :test do
   gem "simplecov"
   gem "selenium-webdriver", "~> 4.14"
   gem "timecop"
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
