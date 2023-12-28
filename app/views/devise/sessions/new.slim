@@ -15,6 +15,7 @@
         = f.label :remember_me
 
   .actions
-    = f.submit "Log in"
+    .mb-4
+      = f.submit "Log in", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded focus:shadow-outline"
 
 = render "devise/shared/links"

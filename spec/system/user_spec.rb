@@ -32,7 +32,7 @@ RSpec.describe "User", type: :system do
 
     click_on "Login"
 
-    expect(page).to have_link("Sign up")
+    expect(page).to have_button("Log in")
     expect(page).to have_link("Forgot your password?")
 
     fill_in "Username", with: user.username
@@ -52,7 +52,7 @@ RSpec.describe "User", type: :system do
 
     click_on "Login"
 
-    expect(page).to have_link("Sign up")
+    expect(page).to have_button("Log in")
     expect(page).to have_link("Forgot your password?")
 
     fill_in "Username", with: user.username
