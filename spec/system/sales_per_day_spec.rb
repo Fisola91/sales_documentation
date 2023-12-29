@@ -102,7 +102,7 @@ RSpec.describe "Sales per day", type: :system do
 
     fill_in "date_range", with: "2023-10-23 - 2023-10-25"
 
-    click_on "Search"
+    click_on "Select date"
 
     expect(find_field('date_range').value).to eq("2023-10-23 - 2023-10-25")
 

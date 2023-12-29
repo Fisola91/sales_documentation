@@ -3,7 +3,7 @@
 
 = form_with url: sales_per_day_index_path, method: :get do |f|
   = f.text_field :date_range, value: params[:date_range], data: {controller: "date-range-picker"}
-  = f.submit "Search"
+  = f.submit "Select date", class: "bg-blue-500 hover:bg-blue-700 text-white ml-4 font-bold py-2 px-4 rounded focus:shadow-outline"
 
 table#all-sales-table.w-full.border-collapse.my-4
   thead
