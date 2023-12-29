@@ -6,7 +6,7 @@ export default class extends Controller {
     new DateRangePicker(this.element, {
       locale: {
         format: "YYYY-MM-DD",
-    },
+      },
     });
   }
 }
