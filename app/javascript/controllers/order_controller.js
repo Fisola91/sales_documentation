@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["quantity", "unitPrice", "total"]
+  static targets = ["quantity", "unitPrice", "total", "date"]
 
   updateTotal() {
     const quantity = parseFloat(this.quantityTarget.value)
@@ -11,5 +11,11 @@ export default class extends Controller {
       const total = quantity * unitPrice
       this.totalTarget.value = total.toFixed(2)
     }
+  }
+
+  selectedDate() {
+    const dateValue = this.dateTarget.value;
+
+    Turbo.visit(`/orders?date=${dateValue}&commit=see+details`);
   }
 }
