@@ -26,6 +26,21 @@ RSpec.describe 'Order management', type: :system do
     within ("#summary-table caption") do
       expect(page).to have_content("2022-12-01")
     end
+
+    within ("#summary-table tbody tr") do
+      expect(page).to have_content("Product 1")
+      expect(page).to have_content("10.0")
+      expect(page).to have_content("2.0")
+      expect(page).to have_content("20.0")
+      expect(page).to have_link("edit")
+      expect(page).to have_link("delete")
+    end
+
+    within ("#summary-table tfoot tr") do
+      expect(page).to have_content("Total")
+      expect(page).to have_content("10")
+      expect(page).to have_content("20")
+    end
   end
 
   context "when form input and submission" do
