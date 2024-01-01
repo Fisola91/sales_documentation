@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Order management', type: :system do
   let(:user) { create(:user) }
+  let(:order) { create(:order) }
 
   before do
     login_as user
@@ -17,6 +18,29 @@ RSpec.describe 'Order management', type: :system do
     expect(page).to have_field("Quantity", text: "")
     expect(page).to have_field("Unit price", text: "")
     expect(page).to have_field("Total", text: "", disabled: true)
+  end
+
+  it "selects date and display order record for the selected date" do
+    fill_in "date", with: order.date
+
+    within ("#summary-table caption") do
+      expect(page).to have_content("2022-12-01")
+    end
+
+    within ("#summary-table tbody tr") do
+      expect(page).to have_content("Product 1")
+      expect(page).to have_content("10.0")
+      expect(page).to have_content("2.0")
+      expect(page).to have_content("20.0")
+      expect(page).to have_link("edit")
+      expect(page).to have_link("delete")
+    end
+
+    within ("#summary-table tfoot tr") do
+      expect(page).to have_content("Total")
+      expect(page).to have_content("10")
+      expect(page).to have_content("20")
+    end
   end
 
   context "when form input and submission" do
