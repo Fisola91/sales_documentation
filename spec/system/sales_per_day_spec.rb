@@ -3,16 +3,21 @@ require 'rails_helper'
 RSpec.describe "Sales per day", type: :system do
   let(:user) { create(:user) }
 
-  before do
-    login_as user
-
-    create_list(:order, 5, date: '2023-10-22')
-    create_list(:order, 5, date: '2023-10-23')
-    create_list(:order, 5, date: '2023-10-24')
-    create_list(:order, 5, date: '2023-10-25')
-  end
+  let!(:order) {
+    [
+      create_list(:order, 5, date: '2023-10-22'),
+      create_list(:order, 5, date: '2023-10-23'),
+      create_list(:order, 5, date: '2023-10-24'),
+      create_list(:order, 5, date: '2023-10-25')
+    ].flatten
+  }
 
   let(:today_date) { Date.today }
+
+  before do
+    login_as user
+  end
+
 
   it "displays page table headings" do
     visit orders_path
@@ -38,7 +43,31 @@ RSpec.describe "Sales per day", type: :system do
       expect(page).to have_link("Homepage")
 
       within ("#all-sales-table tbody") do
+        expect(page).to have_content('2023-10-22')
+        expect(page).to have_content('100.0')
         expect(page).to have_content('2023-10-24')
+        expect(page).to have_content('100.0')
+        expect(page).to have_content('2023-10-25')
+        expect(page).to have_content('100.0')
+      end
+    end
+
+    it "shows ground total for the sum rows for different dates" do
+      visit orders_path
+      expect(page).to have_link("all sales")
+
+      click_link "all sales"
+      expect(page).to have_content("ALL SALES PER DAY")
+      expect(page).to have_link("Homepage")
+
+      within ("#all-sales-table tbody") do
+        expect(page).to have_content('2023-10-24')
+        expect(page).to have_content('100.0')
+      end
+
+      within ("#all-sales-table tfoot") do
+        expect(page).to have_content('Total')
+        expect(page).to have_content('400.0')
       end
     end
 
