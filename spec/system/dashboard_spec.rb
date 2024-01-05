@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.fdescribe 'Dashboard', type: :system do
+RSpec.describe 'Dashboard', type: :system do
   let(:user) { create(:user) }
   let!(:order) {
     [

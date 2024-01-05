@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Order management', type: :system do
   let(:user) { create(:user) }
-  let(:order) { create(:order) }
+  let(:order) { create(:order, name: 'Product 1') }
 
   before do
     login_as user
