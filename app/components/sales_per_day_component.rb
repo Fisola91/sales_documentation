@@ -5,25 +5,14 @@ class SalesPerDayComponent < ViewComponent::Base
     @orders = orders
   end
 
-  def grouped_by_date
-    orders.group_by do |order|
-      date_format(order)
-    end
-  end
-
-  def sales_per_day_total(day_orders)
-    day_orders.sum { |order| order[:total] }
-  end
-
   def ground_total
-    orders.sum { |order| order[:total] }
+    orders.values.sum
+  end
+
+  def date_format(date)
+    date.strftime("%Y-%m-%d")
   end
 
   attr_reader :orders
-
-  private
-
-  def date_format(order)
-    order.date.strftime("%Y-%m-%d")
-  end
 end
+
