@@ -40,7 +40,7 @@ RSpec.describe "Sales per day", type: :system do
 
       click_link "all sales"
       expect(page).to have_content("ALL SALES PER DAY")
-      expect(page).to have_link("Homepage")
+      expect(page).to have_link("Dashboard")
 
       within ("#all-sales-table tbody") do
         expect(page).to have_content('2023-10-22')
@@ -58,7 +58,7 @@ RSpec.describe "Sales per day", type: :system do
 
       click_link "all sales"
       expect(page).to have_content("ALL SALES PER DAY")
-      expect(page).to have_link("Homepage")
+      expect(page).to have_link("Dashboard")
 
       within ("#all-sales-table tbody") do
         expect(page).to have_content('2023-10-24')
@@ -71,40 +71,37 @@ RSpec.describe "Sales per day", type: :system do
       end
     end
 
-    it "returns back to the homepage" do
-      visit orders_path
+    it "returns back to the dashboard" do
+      visit dashboard_index_path
       expect(page).to have_link("all sales")
 
       click_link "all sales"
       expect(page).to have_content("ALL SALES PER DAY")
-      expect(page).to have_link("Homepage")
-      click_link "Homepage"
+      expect(page).to have_link("Dashboard")
+      click_link "Dashboard"
 
-      within ("#form") do
-        expect(page).to have_field("date", with: today_date)
-      end
+      expect(find("#all-sales-table tbody")).to have_css("tr", count: 4)
     end
 
     context "when click on see details button" do
       it "displays table information and change the date picker to the specific date" do
-        visit orders_path
+        visit dashboard_index_path
         expect(page).to have_link("all sales")
 
         click_link "all sales"
 
-        within all("#all-sales-table tbody tr").first do
-          expect(page).to have_content('2023-10-22')
-          expect(page).to have_button("see details")
-
-          click_button "see details"
+        within ('tbody') do
+          within('tr', text: '2023-10-25') do
+            click_button 'see details'
+          end
         end
 
         within ("#form") do
-          expect(page).to have_field("date", with: '2023-10-22')
+          expect(page).to have_field("date", with: '2023-10-25')
         end
 
         within ("#summary-table caption") do
-          expect(page).to have_content('2023-10-22')
+          expect(page).to have_content('2023-10-25')
         end
 
         within all("#summary-table tbody tr").first do

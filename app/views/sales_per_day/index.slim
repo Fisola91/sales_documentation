@@ -1,5 +1,11 @@
 .max-w-md.mx-auto
   p ALL SALES PER DAY
+  = form_with url: sales_per_day_index_path, method: :get do |f|
+    = f.text_field :date_range, value: params[:date_range], data: {controller: "date-range-picker"}
+    = f.submit "Select date", class: "bg-blue-500 hover:bg-blue-700 text-white ml-4 font-bold py-2 px-4 rounded focus:shadow-outline"
+
   = render @all_sales
 
   = homepage_link
+
+  = link_to "Dashboard", dashboard_index_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline"

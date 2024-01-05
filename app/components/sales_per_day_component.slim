@@ -1,8 +1,4 @@
 
-= form_with url: sales_per_day_index_path, method: :get do |f|
-  = f.text_field :date_range, value: params[:date_range], data: {controller: "date-range-picker"}
-  = f.submit "Select date", class: "bg-blue-500 hover:bg-blue-700 text-white ml-4 font-bold py-2 px-4 rounded focus:shadow-outline"
-
 table#all-sales-table.w-full.border-collapse.my-4
   thead
     tr
@@ -10,12 +6,12 @@ table#all-sales-table.w-full.border-collapse.my-4
       th.border.px-4.text-right Earnings
       th.border.px-4.text-right See details
   tbody
-  - grouped_by_date.each do |date, day_orders|
+  - orders.each do |order|
     tr
-      td.border.px-4.text-left = date
-      td.border.px-4.text-right = sales_per_day_total(day_orders)
+      td.border.px-4.text-left = date_format(order.date)
+      td.border.px-4.text-right = order.total
       td.border.px-4.text-right = form_with url: orders_path, method: :get do |f|
-        = f.hidden_field :date, value: date
+        = f.hidden_field :date, value: order.date
         = f.submit "see details", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline"
   tfoot
     tr
