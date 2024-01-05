@@ -4,10 +4,7 @@ class SalesPerDayController < ApplicationController
     if params[:date_range]
       start_date, end_date = params[:date_range].split(" - ")
 
-      selected_orders = Order.where(date: start_date..end_date).group(:date).select("date, SUM(total) as total").order(date: :asc)
-      # Order.where(date: start_date..end_date).group(:date).order(date: :asc).select("date").sum(:total)
-
-      @all_sales = SalesPerDayComponent.new(orders: selected_orders)
+      @all_sales = SalesPerDayComponent.new(orders: selected_orders(start_date, end_date))
     else
       @all_sales = SalesPerDayComponent.new(orders: all_orders)
     end
@@ -15,6 +12,14 @@ class SalesPerDayController < ApplicationController
   end
 
   private
+
+  def selected_orders(start_date, end_date)
+    selected_orders = Order.where(date: start_date..end_date)
+                           .group(:date)
+                           .select("date, SUM(total) as total")
+                           .order(date: :asc)
+
+  end
 
   def all_orders
     @all_orders ||= Order.group(:date)
