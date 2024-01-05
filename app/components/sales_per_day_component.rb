@@ -6,7 +6,7 @@ class SalesPerDayComponent < ViewComponent::Base
   end
 
   def ground_total
-    orders.values.sum
+    orders.sum { |order| order[:total]}
   end
 
   def date_format(date)
@@ -14,5 +14,8 @@ class SalesPerDayComponent < ViewComponent::Base
   end
 
   attr_reader :orders
+
+  private
+
 end
 

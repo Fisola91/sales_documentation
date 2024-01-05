@@ -6,12 +6,12 @@ table#all-sales-table.w-full.border-collapse.my-4
       th.border.px-4.text-right Earnings
       th.border.px-4.text-right See details
   tbody
-  - orders.each do |date, total|
+  - orders.each do |order|
     tr
-      td.border.px-4.text-left = date_format(date)
-      td.border.px-4.text-right = total
+      td.border.px-4.text-left = date_format(order.date)
+      td.border.px-4.text-right = order.total
       td.border.px-4.text-right = form_with url: orders_path, method: :get do |f|
-        = f.hidden_field :date, value: date
+        = f.hidden_field :date, value: order.date
         = f.submit "see details", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline"
   tfoot
     tr
