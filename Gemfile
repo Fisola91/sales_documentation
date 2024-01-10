@@ -17,6 +17,8 @@ gem "turbo-rails"
 gem "view_component"
 gem "devise"
 gem "simple_form"
+gem "chartkick"
+gem "groupdate"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
