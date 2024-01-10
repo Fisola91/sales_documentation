@@ -1,5 +1,20 @@
-.max-w-md.mx-auto
-  p Recent sales
+= line_chart @period,
+              xtitle: "Months",
+              ytitle: "Total"
+
+.flex.space-x-4.justify-center.mt-6
+  = form_with url: dashboard_index_path, method: :get do |f|
+    = f.hidden_field :monthly
+    = f.submit "monthly sales", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline"
+  = form_with url: dashboard_index_path, method: :get do |f|
+    = f.hidden_field :weekly
+    = f.submit "weekly sales", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline"
+  = form_with url: dashboard_index_path, method: :get do |f|
+    = f.hidden_field :daily
+    = f.submit "Last 10 days sales", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline"
+
+.max-w-md.mx-auto.mt-6
+  p.mt-2.font-medium Recent sales(Top 5)
   = render @top_five_sales
 
   = link_to "all sales", sales_per_day_index_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline"
