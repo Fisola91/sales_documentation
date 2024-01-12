@@ -14,8 +14,8 @@
     = f.submit "Last 10 days sales", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline"
 
 .max-w-md.mx-auto.mt-6
-  p.mt-2.font-medium Recent sales(Top 5)
+  .flex.justify-between.font-medium.mt-2
+    p Recent sales(Top 5)
+    = link_to "all sales", sales_per_day_index_path, class: "hover:bg-blue-200", style: "color: blue; text-decoration: underline;"
   = render @top_five_sales
-
-  = link_to "all sales", sales_per_day_index_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline"
   = homepage_link
