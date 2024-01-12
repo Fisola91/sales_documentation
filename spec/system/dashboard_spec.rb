@@ -41,4 +41,19 @@ RSpec.describe 'Dashboard', type: :system do
       expect(page).to have_content('400.0')
     end
   end
+
+  context "Charts" do
+    it "displays sales chart" do
+      visit dashboard_index_path
+
+      click_on "monthly sales"
+      expect(page).to have_css("#month")
+
+      click_on "weekly sales"
+      expect(page).to have_css("#week")
+
+      click_on "Last 10 days sales"
+      expect(page).to have_css("#month")
+    end
+  end
 end
