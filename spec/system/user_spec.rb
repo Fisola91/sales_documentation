@@ -19,8 +19,6 @@ RSpec.describe "User", type: :system do
     fill_in "Password confirmation", with: "123456"
 
     click_on "Sign up"
-
-    expect(page).to have_content("Welcome, Suyi")
     expect(page).to have_link("Sign out")
   end
 
@@ -40,7 +38,6 @@ RSpec.describe "User", type: :system do
 
     click_on "Log in"
 
-    expect(page).to have_content("Welcome, #{user.username}")
     expect(page).to have_link("Sign out")
   end
 
@@ -59,8 +56,6 @@ RSpec.describe "User", type: :system do
     fill_in "Password", with: user.password
 
     click_on "Log in"
-
-    expect(page).to have_content("Welcome, #{user.username}")
 
     click_on "Sign out"
 

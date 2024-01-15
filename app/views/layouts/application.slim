@@ -13,6 +13,4 @@ html lang="en"
   body.m-0
     main
       = render NavBarComponent.new(user_signed_in: user_signed_in?)
-      - if user_signed_in?
-        h2 Welcome, #{current_user.username}
       = yield
