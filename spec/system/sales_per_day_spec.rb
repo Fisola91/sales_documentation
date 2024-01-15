@@ -40,7 +40,7 @@ RSpec.describe "Sales per day", type: :system do
 
       click_link "all sales"
       expect(page).to have_content("ALL SALES PER DAY")
-      expect(page).to have_link("Dashboard")
+      expect(page).to have_link("Enter sales")
 
       within ("#all-sales-table tbody") do
         expect(page).to have_content('2023-10-22')
@@ -58,7 +58,7 @@ RSpec.describe "Sales per day", type: :system do
 
       click_link "all sales"
       expect(page).to have_content("ALL SALES PER DAY")
-      expect(page).to have_link("Dashboard")
+      expect(page).to have_link("Enter sales")
 
       within ("#all-sales-table tbody") do
         expect(page).to have_content('2023-10-24')
@@ -77,8 +77,8 @@ RSpec.describe "Sales per day", type: :system do
 
       click_link "all sales"
       expect(page).to have_content("ALL SALES PER DAY")
-      expect(page).to have_link("Dashboard")
-      click_link "Dashboard"
+      expect(page).to have_link("Enter sales")
+      find("#image").click
 
       expect(find("#all-sales-table tbody")).to have_css("tr", count: 4)
     end
