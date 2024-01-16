@@ -16,7 +16,6 @@ RSpec.describe "User", type: :system do
     fill_in "Username", with: "Suyi"
     fill_in "Email", with: "suyi@gmail.com"
     fill_in "user_password", with: "123456"
-    fill_in "Password confirmation", with: "123456"
 
     click_on "Sign up"
     expect(page).to have_link("Sign out")

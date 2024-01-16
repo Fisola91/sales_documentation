@@ -4,7 +4,7 @@
 # components.
 # See https://github.com/heartcombo/simple_form#custom-components to know
 # more about custom components.
-# Dir[Rails.root.join('lib/components/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('lib/components/**/*.rb')].each { |f| require f }
 #
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
@@ -173,4 +173,21 @@ SimpleForm.setup do |config|
   # Defines validation classes to the input_field. By default it's nil.
   # config.input_field_valid_class = 'is-valid'
   # config.input_field_error_class = 'is-invalid'
+  config.wrappers :input_group, class: 'mb-3 form-group' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+    b.use :label, class: 'form-label'
+    b.wrapper :input_group_tag, class: 'input-group' do |ba|
+      ba.optional :prepend
+      ba.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: 'is-valid'
+      ba.optional :append
+      ba.use :full_error, wrap_with: { class: 'invalid-feedback' }
+    end
+    b.use :hint, wrap_with: { class: 'form-text' }
+  end
 end
