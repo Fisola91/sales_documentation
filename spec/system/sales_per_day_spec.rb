@@ -5,10 +5,10 @@ RSpec.describe "Sales per day", type: :system do
 
   let!(:order) {
     [
-      create_list(:order, 5, date: '2023-10-22'),
-      create_list(:order, 5, date: '2023-10-23'),
-      create_list(:order, 5, date: '2023-10-24'),
-      create_list(:order, 5, date: '2023-10-25')
+      create_list(:order, 5, user: user, date: '2023-10-22'),
+      create_list(:order, 5, user: user, date: '2023-10-23'),
+      create_list(:order, 5, user: user, date: '2023-10-24'),
+      create_list(:order, 5, user: user, date: '2023-10-25')
     ].flatten
   }
 

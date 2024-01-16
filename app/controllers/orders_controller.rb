@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    if order_manager.create_order
+    if order_manager.create_order(current_user)
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: [
@@ -97,11 +97,11 @@ class OrdersController < ApplicationController
       date: date_from_params,
       name: name,
       quantity: quantity,
-      unit_price: unit_price,
+      unit_price: unit_price
     )
   end
 
   def all_orders(date)
-    @all_orders ||= Order.created_on(date).order(date: :asc)
+    @all_orders ||= current_user_orders.created_on(date).order(date: :asc)
   end
 end

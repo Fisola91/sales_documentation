@@ -7,8 +7,8 @@ class OrderManager
     @unit_price = unit_price
   end
 
-  def create_order
-    Order.new(
+  def create_order(current_user)
+    current_user.orders.new(
       date: date,
       name: name,
       quantity: quantity,

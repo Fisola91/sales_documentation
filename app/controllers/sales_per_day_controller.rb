@@ -14,7 +14,7 @@ class SalesPerDayController < ApplicationController
   private
 
   def selected_orders(start_date, end_date)
-    selected_orders = Order.where(date: start_date..end_date)
+    selected_orders ||= current_user_orders.where(date: start_date..end_date)
                            .group(:date)
                            .select("date, SUM(total) as total")
                            .order(date: :asc)
@@ -22,7 +22,7 @@ class SalesPerDayController < ApplicationController
   end
 
   def all_orders
-    @all_orders ||= Order.group(:date)
+    @all_orders ||= current_user_orders.group(:date)
                          .select("date, SUM(total) as total")
                          .order(date: :desc)
   end

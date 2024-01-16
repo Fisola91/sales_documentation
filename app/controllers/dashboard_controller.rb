@@ -13,21 +13,21 @@ class DashboardController < ApplicationController
 
   private
   def top_five_sales
-    @top_sales ||= Order.group(:date)
+    @top_sales ||= current_user_orders.group(:date)
                         .select("date, SUM(total) as total")
                         .order(date: :desc)
                         .limit(5)
   end
 
   def monthly
-    Order.group_by_month(:date).sum(:total)
+    current_user_orders.group_by_month(:date).sum(:total)
   end
 
   def weekly
-    Order.group_by_week(:date).sum(:total)
+    current_user_orders.group_by_week(:date).sum(:total)
   end
 
   def daily
-    Order.group_by_day(:date, last: 10).sum(:total)
+    current_user_orders.group_by_day(:date, last: 10).sum(:total)
   end
 end
