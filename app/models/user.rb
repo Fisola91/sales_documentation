@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :orders
   validates :email, :encrypted_password, presence: true, uniqueness: true
 
   # Include default devise modules. Others available are:
