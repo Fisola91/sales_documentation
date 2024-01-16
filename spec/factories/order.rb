@@ -5,5 +5,7 @@ FactoryBot.define do
       unit_price { 2.0 }
       total { quantity.to_f * unit_price.to_f }
       date { "2022-12-01"}
+
+      association :user, factory: :user
     end
   end
