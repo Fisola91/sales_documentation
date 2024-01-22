@@ -24,7 +24,7 @@ RSpec.describe "Sales per day", type: :system do
     expect(page).to have_link("all sales")
 
     click_link "all sales"
-    expect(page).to have_content("ALL SALES PER DAY")
+    expect(page).to have_content("Daily sales")
 
     within ("#all-sales-table thead tr") do
       expect(page).to have_content("Date")
@@ -39,7 +39,7 @@ RSpec.describe "Sales per day", type: :system do
       expect(page).to have_link("all sales")
 
       click_link "all sales"
-      expect(page).to have_content("ALL SALES PER DAY")
+      expect(page).to have_content("Daily sales")
       expect(page).to have_link("Enter sales")
 
       within ("#all-sales-table tbody") do
@@ -57,7 +57,7 @@ RSpec.describe "Sales per day", type: :system do
       expect(page).to have_link("all sales")
 
       click_link "all sales"
-      expect(page).to have_content("ALL SALES PER DAY")
+      expect(page).to have_content("Daily sales")
       expect(page).to have_link("Enter sales")
 
       within ("#all-sales-table tbody") do
@@ -76,7 +76,7 @@ RSpec.describe "Sales per day", type: :system do
       expect(page).to have_link("all sales")
 
       click_link "all sales"
-      expect(page).to have_content("ALL SALES PER DAY")
+      expect(page).to have_content("Daily sales")
       expect(page).to have_link("Enter sales")
       find("#image").click
 
