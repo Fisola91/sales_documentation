@@ -15,12 +15,12 @@ class DashboardController < ApplicationController
 
   def top_five_sales
     @top_sales ||= current_user_orders.group(:date)
-                        .select("date, SUM(total) as total")
-                        .order(date: :desc)
-                        .limit(5)
+                    .select("date, SUM(total) as total")
+                    .order(date: :desc)
+                    .limit(5)
   end
 
-  def group_and_map_by_period(period, last_option= nil)
+  def group_and_map_by_period(period, last_option = nil)
     current_user_orders.public_send("group_by_#{period}", :date, last: last_option)
       .sum(:total)
       .map do |date, total|
@@ -29,8 +29,9 @@ class DashboardController < ApplicationController
   end
 
   def formatted_date(date)
-    params[:daily] ? parsed_date(date).strftime("%b %d") : parsed_date(date).strftime("%b %Y")
+    params[:monthly] ? parsed_date(date).strftime("%b %Y") : parsed_date(date).strftime("%b %d")
   end
+
   def parsed_date(date)
     Date.parse(date.to_s)
   end
