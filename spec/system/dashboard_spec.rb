@@ -53,7 +53,7 @@ RSpec.describe 'Dashboard', type: :system do
       expect(page).to have_css("#week")
 
       click_on "Last 10 days sales"
-      expect(page).to have_css("#month")
+      expect(page).to have_css("#day")
     end
   end
 end
