@@ -1,11 +1,11 @@
 class DashboardController < ApplicationController
   def index
-    if params[:monthly]
-      @period = monthly
+    if params[:daily]
+      @period = group_and_map_by_period(:day, 10)
     elsif params[:weekly]
-      @period = weekly
+      @period = group_and_map_by_period(:week)
     else
-      @period = daily
+      @period = group_and_map_by_period(:month)
     end
 
     @top_five_sales = SalesPerDayComponent.new(orders: top_five_sales)
@@ -20,28 +20,18 @@ class DashboardController < ApplicationController
                         .limit(5)
   end
 
-  def monthly
-    current_user_orders.group_by_month(:date).sum(:total)
-    .map do |date, total|
-      [parsed_date(date), total]
-    end
+  def group_and_map_by_period(period, last_option= nil)
+    current_user_orders.public_send("group_by_#{period}", :date, last: last_option)
+      .sum(:total)
+      .map do |date, total|
+        [formatted_date(date), total]
+      end
   end
 
-  def weekly
-    current_user_orders.group_by_week(:date).sum(:total)
-    .map do |date, total|
-      [parsed_date(date), total]
-    end
+  def formatted_date(date)
+    params[:daily] ? parsed_date(date).strftime("%b %d") : parsed_date(date).strftime("%b %Y")
   end
-
-  def daily
-    current_user_orders.group_by_day(:date, last: 10).sum(:total)
-    .map do |date, total|
-      [parsed_date(date), total]
-    end
-  end
-
   def parsed_date(date)
-    params[:daily] ? Date.parse(date.to_s).strftime("%b %d") : Date.parse(date.to_s).strftime("%b %Y")
+    Date.parse(date.to_s)
   end
 end
