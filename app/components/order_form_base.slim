@@ -1,21 +1,22 @@
-= form_with url: form_url, scope: :order, method: form_method, html: { class: "w-100", id: "form"}, data: { controller: "order", turbo: form_turbo } do |f|
-  .mb-2
-    = f.date_field :date, class: "block text-gray-700 text-sm font-bold", id: "date", value: created_date, data: { action: "input->order#selectedDate", "order-target": "date"}
-  .mb-2
-    = f.label :name, class: "block text-gray-700 text-sm font-bold"
-    = f.text_field :name, class: "form-input mt-1 block w-full",autofocus: true, required: true, tabindex: 1
+.max-w-md.mx-auto.mt-6
+  = form_with url: form_url, scope: :order, method: form_method, html: { class: "w-100", id: "form"}, data: { controller: "order", turbo: form_turbo } do |f|
+    .mb-2
+      = f.date_field :date, class: "block text-gray-700 text-sm font-bold", id: "date", value: created_date, data: { action: "input->order#selectedDate", "order-target": "date"}
+    .mb-2
+      = f.label :name, class: "block text-gray-700 text-sm font-bold"
+      = f.text_field :name, class: "form-input mt-1 block w-full",autofocus: true, required: true, tabindex: 1
 
-  .mb-2
-    = f.label :quantity, class: "block text-gray-700 text-sm font-bold"
-    = f.number_field :quantity, class: "form-input mt-1 block w-full", step: 1, min: 0, required: true, tabindex: 2, data: { action: "change->order#updateTotal", "order-target": "quantity" }
+    .mb-2
+      = f.label :quantity, class: "block text-gray-700 text-sm font-bold"
+      = f.number_field :quantity, class: "form-input mt-1 block w-full", step: 1, min: 0, required: true, tabindex: 2, data: { action: "change->order#updateTotal", "order-target": "quantity" }
 
-  .mb-2
-    = f.label :unit_price, class: "block text-gray-700 text-sm font-bold"
-    = f.number_field :unit_price, class: "form-input mt-1 block w-full", required: true, tabindex: 3, data: { action: "change->order#updateTotal", "order-target": "unitPrice" }
+    .mb-2
+      = f.label :unit_price, class: "block text-gray-700 text-sm font-bold"
+      = f.number_field :unit_price, class: "form-input mt-1 block w-full", required: true, tabindex: 3, data: { action: "change->order#updateTotal", "order-target": "unitPrice" }
 
-  .mb-4
-    = f.label :total, class: "block text-gray-700 text-sm font-bold"
-    = f.text_field :total, class: "form-input mt-1 block w-full", disabled: true, placeholder: "Total", tabindex: -1, data: { "order-target": "total" }
+    .mb-4
+      = f.label :total, class: "block text-gray-700 text-sm font-bold"
+      = f.text_field :total, class: "form-input mt-1 block w-full", disabled: true, placeholder: "Total", tabindex: -1, data: { "order-target": "total" }
 
-  .mt-4
-    = f.submit submit, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline", tabindex: 4
+    .mt-4
+      = f.submit submit, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:shadow-outline", tabindex: 4
