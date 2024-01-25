@@ -61,4 +61,23 @@ RSpec.describe "User", type: :system do
     expect(page).to have_link("Login")
     expect(page).to have_link("Register")
   end
+
+  it "returns error when user sign in with wrong credentials" do
+    visit "/"
+
+    expect(page).to have_link("Login")
+    expect(page).to have_link("Register")
+
+    click_on "Login"
+
+    fill_in "Username", with: "Bobo"
+    fill_in "Password", with: "abbey"
+
+    click_on "Log in"
+
+    expect(page).to have_button("Log in")
+    expect(page).to have_link("Forgot your password?")
+
+    expect(page).to have_content("Invalid Username or password")
+  end
 end
