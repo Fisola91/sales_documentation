@@ -15,5 +15,5 @@ html lang="en"
       = render NavBarComponent.new(user_signed_in: user_signed_in?)
       .max-w-md.mx-auto.mt-6
         - flash.each do |key, value|
-          = content_tag :div, value, class: "flash #{key}", style: (key == "notice" ? "color: blue;" : "color: red;")
+          = content_tag :div, value, class: "flash #{key} text-center", style: (key == "notice" ? "color: blue;" : "color: red;")
       = yield
