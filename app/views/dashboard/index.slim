@@ -17,6 +17,6 @@
 
   .flex.justify-between.font-medium.mt-6
     p Recent sales (Top 5)
-    = all_sales_link
+    = link_to "all sales", sales_per_day_index_path, class: hover_color, style:  color_style
   = render @last_five_sales
   = new_sales_link
