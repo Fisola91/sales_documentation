@@ -15,9 +15,8 @@
       = f.hidden_field :daily
       = f.submit "Last 10 days sales", class: button_style_bg_blue
 
-
   .flex.justify-between.font-medium.mt-6
-    p Recent sales(Top 5)
+    p Recent sales (Top 5)
     = all_sales_link
-  = render @top_five_sales
+  = render @last_five_sales
   = new_sales_link

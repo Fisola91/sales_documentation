@@ -2,18 +2,20 @@ class DashboardController < ApplicationController
   def index
     if params[:daily]
       @period = group_and_map_by_period(:day, 10)
+      @active_day = params[:daily]
     elsif params[:weekly]
       @period = group_and_map_by_period(:week)
+      @active_week = params[:weekly]
     else
       @period = group_and_map_by_period(:month)
+      @active_day = params[:monthly]
     end
-
-    @top_five_sales = SalesPerDayComponent.new(orders: top_five_sales)
+    @last_five_sales = SalesPerDayComponent.new(orders: last_five_sales)
   end
 
   private
 
-  def top_five_sales
+  def last_five_sales
     @top_sales ||= current_user_orders.group(:date)
                     .select("date, SUM(total) as total")
                     .order(date: :desc)
