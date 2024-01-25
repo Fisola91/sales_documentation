@@ -5,3 +5,4 @@ import "chartkick"
 import "Chart.bundle"
 import moment from "moment"
 window.moment = moment
+import "@fortawesome/fontawesome-free"
