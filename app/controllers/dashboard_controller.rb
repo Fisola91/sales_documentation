@@ -7,13 +7,12 @@ class DashboardController < ApplicationController
     else
       @period = group_and_map_by_period(:month)
     end
-
-    @top_five_sales = SalesPerDayComponent.new(orders: top_five_sales)
+    @last_five_sales = SalesPerDayComponent.new(orders: last_five_sales)
   end
 
   private
 
-  def top_five_sales
+  def last_five_sales
     @top_sales ||= current_user_orders.group(:date)
                     .select("date, SUM(total) as total")
                     .order(date: :desc)
