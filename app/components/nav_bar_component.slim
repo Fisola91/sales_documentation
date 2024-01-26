@@ -1,12 +1,14 @@
-- if user_signed_in
+.container
   .flex.justify-between.items-center.space-x-4.mt-6
-    = link_to image_tag('sale-logo-copy.jpg', alt: 'sales logo', size: '80x80'), dashboard_index_path, id: "image"
-    = link_to 'Sign out', destroy_user_session_path, method: :delete, class: "border border-blue-500 hover:bg-blue-300 mr-4 text-black font-normal py-2 px-4 rounded-full focus:shadow-outline"
-- else
-  .flex.justify-between.items-center.space-x-4.mt-6
-    = link_to image_tag('sale-logo-copy.jpg', alt: 'sales logo', size: '80x80'), root_path
-    .flex
-      = link_to "Login", new_user_session_path, class: "border border-blue-500 hover:bg-blue-300 mr-4 text-black font-normal py-2 px-4 rounded-full focus:shadow-outline"
-      = link_to "Register", new_user_registration_path, class: "border border-blue-500 hover:bg-blue-300 mr-4 text-black font-normal py-2 px-4 rounded-full focus:shadow-outline"
+    - if user_signed_in
+        = link_to dashboard_index_path do
+          = image_tag_for_nav_bar
+        = link_to 'Sign out', destroy_user_session_path, method: :delete, class: "border border-blue-500 hover:bg-blue-300 mr-4 text-black font-normal py-2 px-4 rounded-full focus:shadow-outline"
+    - else
+        = link_to root_path do
+          = image_tag_for_nav_bar
+        .flex
+          = link_to "Login", new_user_session_path, class: "border border-blue-500 hover:bg-blue-300 mr-4 text-black font-normal py-2 px-4 rounded-full focus:shadow-outline"
+          = link_to "Register", new_user_registration_path, class: "border border-blue-500 hover:bg-blue-300 mr-4 text-black font-normal py-2 px-4 rounded-full focus:shadow-outline"
 
 

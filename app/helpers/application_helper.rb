@@ -26,4 +26,8 @@ module ApplicationHelper
   def current_user_orders
     current_user.orders
   end
+
+  def image_tag_for_nav_bar
+    image_tag('sale-logo-copy.jpg', alt: 'sales logo', size: '80x80', id: "image")
+  end
 end
