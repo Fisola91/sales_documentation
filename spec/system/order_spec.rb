@@ -32,8 +32,8 @@ RSpec.describe 'Order management', type: :system do
       expect(page).to have_content("10.0")
       expect(page).to have_content("2.0")
       expect(page).to have_content("20.0")
-      expect(page).to have_link("edit")
-      expect(page).to have_link("delete")
+      expect(page).to have_css(".svg-inline--fa.fa-pen-to-square")
+      expect(page).to have_css(".svg-inline--fa.fa-trash-can")
     end
 
     within ("#summary-table tfoot tr") do
@@ -71,8 +71,8 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("10.0")
         expect(page).to have_content("2.0")
         expect(page).to have_content("20.0")
-        expect(page).to have_link("edit")
-        expect(page).to have_link("delete")
+        expect(page).to have_css(".svg-inline--fa.fa-pen-to-square")
+      expect(page).to have_css(".svg-inline--fa.fa-trash-can")
       end
 
       within ("#summary-table tfoot tr") do
@@ -104,8 +104,8 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("10.0")
         expect(page).to have_content("2.0")
         expect(page).to have_content("20.0")
-        expect(page).to have_link("edit")
-        expect(page).to have_link("delete")
+        expect(page).to have_css(".svg-inline--fa.fa-pen-to-square")
+      expect(page).to have_css(".svg-inline--fa.fa-trash-can")
       end
 
       fill_in 'Name', with: 'Product B'
@@ -126,8 +126,8 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("10.0")
         expect(page).to have_content("2.0")
         expect(page).to have_content("20.0")
-        expect(page).to have_link("edit")
-        expect(page).to have_link("delete")
+        expect(page).to have_css(".svg-inline--fa.fa-pen-to-square")
+      expect(page).to have_css(".svg-inline--fa.fa-trash-can")
       end
 
       within all("#summary-table tbody tr").last do
@@ -135,8 +135,8 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("10.0")
         expect(page).to have_content("3.0")
         expect(page).to have_content("30.0")
-        expect(page).to have_link("edit")
-        expect(page).to have_link("delete")
+        expect(page).to have_css(".svg-inline--fa.fa-pen-to-square")
+      expect(page).to have_css(".svg-inline--fa.fa-trash-can")
       end
 
       within ("#summary-table tfoot tr") do
@@ -162,8 +162,8 @@ RSpec.describe 'Order management', type: :system do
           expect(page).to have_content("10.0")
           expect(page).to have_content("2.0")
           expect(page).to have_content("20.0")
-          expect(page).to have_link("edit")
-          expect(page).to have_link("delete")
+          expect(page).to have_css(".svg-inline--fa.fa-pen-to-square")
+          expect(page).to have_css(".svg-inline--fa.fa-trash-can")
         end
 
         within ("#summary-table tfoot tr") do
@@ -173,7 +173,7 @@ RSpec.describe 'Order management', type: :system do
         end
 
         within ("#summary-table tbody tr") do
-          click_link "edit"
+          find(".svg-inline--fa.fa-pen-to-square").click
         end
 
         expect(page).to have_field("Name", with: "Product A")
@@ -198,8 +198,8 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("10.0")
         expect(page).to have_content("3.0")
         expect(page).to have_content("30.0")
-        expect(page).to have_link("edit")
-        expect(page).to have_link("delete")
+        expect(page).to have_css(".svg-inline--fa.fa-pen-to-square")
+        expect(page).to have_css(".svg-inline--fa.fa-trash-can")
       end
 
       within ("#summary-table tfoot tr") do
@@ -225,8 +225,8 @@ RSpec.describe 'Order management', type: :system do
           expect(page).to have_content("10.0")
           expect(page).to have_content("2.0")
           expect(page).to have_content("20.0")
-          expect(page).to have_link("edit")
-          expect(page).to have_link("delete")
+          expect(page).to have_css(".svg-inline--fa.fa-pen-to-square")
+          expect(page).to have_css(".svg-inline--fa.fa-trash-can")
         end
 
         within ("#summary-table tfoot tr") do
@@ -236,7 +236,7 @@ RSpec.describe 'Order management', type: :system do
         end
 
         within ("#summary-table tbody tr") do
-          click_link "delete"
+          find(".svg-inline--fa.fa-trash-can").click
         end
 
         expect(page).to have_css('table.hidden', visible: false)
@@ -265,8 +265,8 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("10.0")
         expect(page).to have_content("2.0")
         expect(page).to have_content("20.0")
-        expect(page).to have_link("edit")
-        expect(page).to have_link("delete")
+        expect(page).to have_css(".svg-inline--fa.fa-pen-to-square")
+        expect(page).to have_css(".svg-inline--fa.fa-trash-can")
       end
 
       within ("#summary-table tfoot tr") do
