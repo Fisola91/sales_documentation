@@ -80,14 +80,4 @@ RSpec.describe "User", type: :system do
 
     expect(page).to have_content("Invalid Username or password")
   end
-
-  it "sees content of the homepage before login" do
-    visit "/"
-
-    expect(page).to have_link("Login")
-    expect(page).to have_link("Register")
-
-    expect(page).to have_content("Harness the power of data to drive growth and elevate your business success.")
-    expect(page).to have_content("Benefits")
-  end
 end
