@@ -9,7 +9,7 @@ RSpec.describe "User", type: :system do
     expect(page).to have_link("Login")
     expect(page).to have_link("Register")
 
-    click_on "Register"
+    find(".register").click
 
     expect(page).to have_link("Register")
 
