@@ -1,22 +1,23 @@
-.container.my-4.mx-auto
-  .bg-gradient-to-r.banner.from-cyan-500.via-purple-500.to-pink-200.text-gray-600.px-4.h-90.border.border-gray-40.rounded-xl
+.container.my-4.mx-auto.h-screen
+  .bg-gradient-to-r.banner.from-indigo-500.to-cyan-200/50.text-gray-600.px-4.border.border-gray-40.rounded-xl.h-3/5
     .flex.mt-8.items-center.justify-center
-      .flex.flex-col.justify-start.items-start.text-left.text-shadow.font-bold.mt-32.pt-0.w-4/5
-        .flex.justify-start.text-4xl.text-white.mb-6
+      .flex.flex-col.justify-start.items-start.text-left.text-shadow.mt-32.pt-0.w-4/5
+        .flex.justify-start.text-4xl.text-white.mb-6.font-bold
           h1 Simplify Sales Documentation!
-        .flex.flex-col.justify-start.items-start
+        .flex.flex-col.justify-start.items-start.text-white
           h1 Experience the power of streamlined sales documentation designed to
           h1 empower small and medium enterprises.
-        = link_to "Register", new_user_registration_path, class: "bg-blue-500 hover:bg-blue-300 mr-4 my-4 text-black font-normal py-2 px-4 rounded-full focus:shadow-outline"
+        = link_to "Register", new_user_registration_path, class: "bg-white hover:bg-blue-300 mr-4 my-4 text-black font-normal py-2 px-4 rounded-full focus:shadow-outline"
 
-      .flex.justify-end.my-4
+      .flex.flex-col.justify-end.my-4
         = image_tag('chart.jpg', size: "500x500", class: "rounded-full")
+        h1.italic.text-right.my-2.font-bold "Harness the power of data to drive growth and elevate your business success."
 
 
-  h6.text-center.text-3xl.my-6.font-bold How it works
-  .flex.flex-wrap.justify-between
+  h6.text-center.text-3xl.my-6.font-bold Benefits
+  .flex.flex-wrap.justify-between.h-1/2
     .flex-grow.w-full.sm:w-1/2.md:w-1/3.px-4.mb-4
-      .bg-white-300.rounded-xl.overflow-hidden.shadow-lg.shadow.inner.h-48
+      .bg-white-300.rounded-xl.overflow-hidden.shadow-lg.shadow.inner.h-3/4
         .flex.justify-center.mt-3 style="color:blue"
           i.fa-solid.fa-chart-column.text-3xl
         .font-bold.text-xl.mb-2.text-center.my-3 Sales Tracking
@@ -25,7 +26,7 @@
           | This allows you to analyze sales performace, gain insights into revenue trends
           |  and optimize sales strategies.
     .flex-grow.w-full.sm:w-1/2.md:w-1/3.px-4.mb-4
-      .bg-white-300.rounded-xl.overflow-hidden.shadow-lg.shadow.inner.h-48
+      .bg-white-300.rounded-xl.overflow-hidden.shadow-lg.shadow.inner.h-3/4
         .flex.justify-center.mt-3 style="color:blue"
           i.fa-solid.fa-book.text-3xl
         .font-bold.text-xl.mb-2.text-center.my-3 Business Insight
