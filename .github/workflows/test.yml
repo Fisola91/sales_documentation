@@ -38,8 +38,6 @@ jobs:
         run: bin/rails tailwindcss:build
       - name: Run tests
         run: bundle exec rspec
-      - name: Deploy application
-        run: bin/rails assets:precompile
       - name: Archive screenshots on failure
         if: ${{ failure() }}
         uses: actions/upload-artifact@v3
