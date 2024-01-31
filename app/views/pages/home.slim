@@ -1,5 +1,5 @@
 .container.my-4.mx-auto.h-screen
-  .bg-gradient-to-r.banner.from-indigo-500.to-cyan-200/50.text-gray-600.px-4.border.border-gray-40.rounded-xl.h-3/5
+  .bg-gradient-to-r.banner.from-indigo-500.to-cyan-200/50.text-gray-600.px-4.border.border-gray-40.rounded-xl.h-2/5
     .flex.mt-8.items-center.justify-center
       .flex.flex-col.justify-start.items-start.text-left.text-shadow.mt-32.pt-0.w-4/5
         .flex.justify-start.text-4xl.text-white.mb-6.font-bold
@@ -12,7 +12,17 @@
       .flex.flex-col.justify-end.my-4
         = image_tag('chart.jpg', size: "500x500", class: "rounded-full")
         h1.italic.text-right.my-2.font-bold "Harness the power of data to drive growth and elevate your business success."
-
+  .flex.justify-between
+    .flex.flex-col.flex-grow
+      h6.text-3xl.font-bold.my-6 About Sales Documentation
+      h6.sm:w-1/2.md:w-3/4.px-4.mb-4
+        | Sales documentation aims to empower small and medium enterprises with efficient
+        |  tools to manage and grow their businesses effortlessly. We understand the challenges faced
+        |  by market women in keeping track of their sales, and gaining insights to make informed business decisions.
+        |  That is why we have developed a user-friendly app tailored specifically to meet their needs.
+        |  With our app, market women can say goodbye to the hassle of manual paperwork and embrace a more efficient
+        |  way of managing their sales.
+    = image_tag('chart.jpg', size: "500x500", class: "my-6 mx-6")
 
   h6.text-center.text-3xl.my-6.font-bold Benefits
   .flex.flex-wrap.justify-between.h-1/2
