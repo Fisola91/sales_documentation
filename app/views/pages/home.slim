@@ -1,5 +1,5 @@
 .container.my-4.mx-auto.h-screen
-  .bg-gradient-to-r.banner.from-indigo-500.to-cyan-200/50.text-gray-600.px-4.border.border-gray-40.rounded-xl.h-2/5
+  .bg-gradient-to-r.banner.from-indigo-500.to-cyan-200/50.text-gray-600.px-4.border.border-gray-40.rounded-xl.h-1/3
     .flex.mt-8.items-center.justify-center
       .flex.flex-col.justify-start.items-start.text-left.text-shadow.mt-32.pt-0.w-4/5
         .flex.justify-start.text-4xl.text-white.mb-6.font-bold
@@ -10,36 +10,52 @@
         = link_to "Register", new_user_registration_path, class: "bg-white hover:bg-blue-300 mr-4 my-4 text-black font-normal py-2 px-4 rounded-full focus:shadow-outline register"
 
       .flex.flex-col.justify-end.my-4
-        = image_tag('chart.jpg', size: "500x500", class: "rounded-full")
+        = image_tag('chart.jpg', size: "300x300", class: "rounded-full")
         h1.italic.text-right.my-2.font-bold "Harness the power of data to drive growth and elevate your business success."
-  .flex.justify-between
-    .flex.flex-col.flex-grow
-      h6.text-3xl.font-bold.my-6 About Sales Documentation
-      h6.sm:w-1/2.md:w-3/4.px-4.mb-4
+  h6.text-center.text-3xl.font-bold.my-6 About
+  .flex.items-center.justify-center
+    .max-w-md.p-8
+      p.text-lg.text-center.break-all.w-full.md:w-full.lg:w-1/2.mx-auto
         | Sales documentation aims to empower small and medium enterprises with efficient
         |  tools to manage and grow their businesses effortlessly. We understand the challenges faced
         |  by market women in keeping track of their sales, and gaining insights to make informed business decisions.
         |  That is why we have developed a user-friendly app tailored specifically to meet their needs.
         |  With our app, market women can say goodbye to the hassle of manual paperwork and embrace a more efficient
         |  way of managing their sales.
-    = image_tag('chart.jpg', size: "500x500", class: "my-6 mx-6")
-
   h6.text-center.text-3xl.my-6.font-bold Benefits
-  .flex.flex-wrap.justify-between.h-1/2
+  .flex.flex-wrap.justify-between
     .flex-grow.w-full.sm:w-1/2.md:w-1/3.px-4.mb-4
-      .bg-white-300.rounded-xl.overflow-hidden.shadow-lg.shadow.inner.h-3/4
+      .bg-white-300.rounded-xl.overflow-hidden.shadow-lg.shadow.inner
         .flex.justify-center.mt-3 style="color:blue"
           i.fa-solid.fa-chart-column.text-3xl
         .font-bold.text-xl.mb-2.text-center.my-3 Sales Tracking
-        p.px-3.text-xl
+        p.px-3.my-2.text-xl.max-h-24
           | Track and monitor your daily, weekly, and monthly sales.
           | This allows you to analyze sales performace, gain insights into revenue trends
           |  and optimize sales strategies.
-    .flex-grow.w-full.sm:w-1/2.md:w-1/3.px-4.mb-4
-      .bg-white-300.rounded-xl.overflow-hidden.shadow-lg.shadow.inner.h-3/4
+    .flex-grow.sm:w-1/2.md:w-1/3.px-4.mb-4
+      .bg-white-300.rounded-xl.overflow-hidden.shadow-lg.shadow.inner
         .flex.justify-center.mt-3 style="color:blue"
           i.fa-solid.fa-book.text-3xl
         .font-bold.text-xl.mb-2.text-center.my-3 Business Insight
-        p.px-3.text-xl
+        p.px-3.my-2.text-xl.max-h-12
           | Gain valuable insights through your sales documentation by understanding sales trends
           |  and ultimately making informed business decisions based on comprehensive data analysis.
+  footer
+    .bg-white-500.rounded-xl.overflow-hidden.shadow-lg.shadow.inner
+      .flex.justify-between.ml-4.mr-4
+        .contact
+          h3.my-4 Contact
+          p Sales Doc
+          p 70 Hvidovre, 2650
+          p.mb-4 Denmark
+          p Tel: +45 318-316-61
+          p Email: salesdoc@gmail.com
+
+        .flex.flex-col style="color:blue"
+          h3.my-4 Stay connected
+          i.my-2.fa-brands.fa-facebook-f Facebook
+          i.my-2.fa-brands.fa-linkedin  Linkedln
+          i.fa-brands.fa-youtube Youtube
+        .message
+          h3.my-4 Leave a Message Here
