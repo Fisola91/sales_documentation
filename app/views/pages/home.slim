@@ -13,22 +13,20 @@
         = image_tag('chart.jpg', size: "300x300", class: "rounded-full")
         h1.italic.text-right.my-2.font-bold "Harness the power of data to drive growth and elevate your business success."
   h6.text-center.text-3xl.font-bold.my-6 About
-  .flex.items-center.justify-center
-    .max-w-md.p-8
-      p.text-lg.text-center.break-all.w-full.md:w-full.lg:w-1/2.mx-auto
-        | Sales documentation aims to empower small and medium enterprises with efficient
-        |  tools to manage and grow their businesses effortlessly. We understand the challenges faced
-        |  by market women in keeping track of their sales, and gaining insights to make informed business decisions.
-        |  That is why we have developed a user-friendly app tailored specifically to meet their needs.
-        |  With our app, market women can say goodbye to the hassle of manual paperwork and embrace a more efficient
-        |  way of managing their sales.
+  .text-lg.text-center
+    p Sales documentation aims to empower small and medium enterprises with efficient
+    p tools to manage and grow their businesses effortlessly. We understand the challenges faced
+    p by market women in keeping track of their sales, and gaining insights to make informed business decisions.
+    p That is why we have developed a user-friendly app tailored specifically to meet their needs.
+    p With our app, market women can say goodbye to the hassle of manual paperwork and embrace a more efficient
+    p way of managing their sales.
   h6.text-center.text-3xl.my-6.font-bold Benefits
   .flex.flex-wrap.justify-between
     .flex-grow.w-full.sm:w-1/2.md:w-1/3.px-4.mb-4
       .bg-white-300.rounded-xl.overflow-hidden.shadow-lg.shadow.inner
         .flex.justify-center.mt-3 style="color:blue"
           i.fa-solid.fa-chart-column.text-3xl
-        .font-bold.text-xl.mb-2.text-center.my-3 Sales Tracking
+        .font-bold.text-lg.mb-2.text-center.my-3 Sales Tracking
         p.px-3.my-2.text-lg.max-h-24
           | Track and monitor your daily, weekly, and monthly sales.
           | This allows you to analyze sales performace, gain insights into revenue trends
@@ -37,13 +35,13 @@
       .bg-white-300.rounded-xl.overflow-hidden.shadow-lg.shadow.inner
         .flex.justify-center.mt-3 style="color:blue"
           i.fa-solid.fa-book.text-3xl
-        .font-bold.text-xl.mb-2.text-center.my-3 Business Insight
+        .font-bold.text-lg.mb-2.text-center.my-3 Business Insight
         p.px-3.my-2.text-lg.max-h-12
           | Gain valuable insights through your sales documentation by understanding sales trends
           |  and ultimately making informed business decisions based on comprehensive data analysis.
-  footer
+  footer.mt-6
     .bg-white-500.rounded-xl.overflow-hidden.shadow-lg.shadow.inner
-      .flex.justify-between.ml-4.mr-4
+      .flex.justify-between.mr-4.ml-4
         .contact
           h3.my-4 Contact
           p Sales Doc
@@ -59,8 +57,14 @@
           i.fa-brands.fa-youtube Youtube
         .message
           h3.my-4 Leave a Message Here
-          p Work With Us
-          p Our Commitment
-          p Report a Bug
-          p Business Advices
-          p Support Us
+          .flex.justify-between.mx-4
+            .mr-4
+              p.mb-2 Work With Us
+              p.mb-2 Our Commitment
+              p.mb-2 Report a Bug
+              p Support Us
+            .mr-4
+              p.mb-2 Business Advices
+              p.mb-2 About
+              p FAQs
+
