@@ -28,6 +28,6 @@ module ApplicationHelper
   end
 
   def image_tag_for_nav_bar
-    image_tag('lewagon.png', alt: 'sales logo', size: '70x70', id: "image", class: "sales-logo rounded-full")
+    image_tag('logo.png', alt: 'sales logo', size: '100x100', id: "image", class: "sales-logo rounded-full")
   end
 end
