@@ -2,7 +2,7 @@
   .max-w-md.mx-auto
     <h6 class="text-center font-bold">Sign up</h6>
     = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: {turbo: false}) do |f|
-        .bg-white.p-8.rounded-lg.shadow-md
+        .bg-white.rounded-lg.shadow-md
           = f.error_notification class: "block font-bold", style: "color: red;"
           .mt-6
             = f.input :username,

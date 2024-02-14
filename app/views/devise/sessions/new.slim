@@ -1,7 +1,7 @@
 .flex.items-center.justify-center.min-h-screen
   .max-w-md.mx-auto.align-center
     = simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: {turbo: false}) do |f|
-      .bg-white.p-8.rounded-lg.shadow-md
+      .bg-white.rounded-lg.shadow-md
         .mt-6
           = f.input :username, placeholder: "john",
                     autofocus: true,
