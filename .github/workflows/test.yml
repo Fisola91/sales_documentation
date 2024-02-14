@@ -23,6 +23,7 @@ jobs:
       POSTGRES_USER: postgres_u
       POSTGRES_PASSWORD: postgres_p
       POSTGRES_HOST: localhost
+      POSTGRES_TEST_DB: sales_documentation_test
     steps:
       - name: Check out code
         uses: actions/checkout@v3
