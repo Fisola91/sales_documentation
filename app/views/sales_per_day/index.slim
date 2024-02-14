@@ -1,12 +1,13 @@
-.max-w-md.mx-auto.mt-6
-  = form_with url: sales_per_day_index_path, method: :get do |f|
-    = f.text_field :date_range, value: params[:date_range], data: {controller: "date-range-picker"}
-    = f.submit "Select date", class: "bg-blue-500 hover:bg-blue-700 text-white ml-4 font-bold py-2 px-4 rounded focus:shadow-outline"
+.flex.flex-col.items-center.justify-start.min-h-screen.px-4.sm:px-6.lg:px-8
+  .max-w-md.mx-auto.mt-6
+    = form_with url: sales_per_day_index_path, method: :get do |f|
+      = f.text_field :date_range, value: params[:date_range], data: {controller: "date-range-picker"}
+      = f.submit "Select date", class: "bg-blue-500 hover:bg-blue-700 text-white ml-4 font-bold py-2 px-4 rounded focus:shadow-outline"
 
-  = link_to "clear query", sales_per_day_index_path, class: hover_color, style: color_style
+    = link_to "clear query", sales_per_day_index_path, class: hover_color, style: color_style
 
-  .text-center.mt-6.font-bold
-    p Daily sales
-  = render @all_sales
+    .text-center.mt-6.font-bold
+      p Daily sales
+    = render @all_sales
 
-  = new_sales_link
+    = new_sales_link
