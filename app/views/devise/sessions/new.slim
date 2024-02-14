@@ -1,25 +1,25 @@
-.flex.items-center.justify-center.min-h-screen
+/ .flex.items-center.justify-center.min-h-screen
+.flex.flex-col.items-center.justify-start.min-h-screen.pt-12
   .max-w-md.mx-auto.align-center
     = simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: {turbo: false}) do |f|
-      .bg-white.rounded-lg.shadow-md
-        .mt-6
-          = f.input :username, placeholder: "john",
-                    autofocus: true,
-                    input_html: { autocomplete: "username", class: "block" },
-                    label_html: { class: "block font-bold mb-1" }
+      .mt-6
+        = f.input :username, placeholder: "john",
+                  autofocus: true,
+                  input_html: { autocomplete: "username", class: "block" },
+                  label_html: { class: "block font-bold mb-1" }
 
-        .mt-6
-          = f.input :password, placeholder: "......",
-                    input_html: { autocomplete: "current-password", class: "block" },
-                    label_html: { class: "block font-bold mb-1" }
+      .mt-6
+        = f.input :password, placeholder: "......",
+                  input_html: { autocomplete: "current-password", class: "block" },
+                  label_html: { class: "block font-bold mb-1" }
 
-        .mt-3
-          - if devise_mapping.rememberable?
-              = f.check_box :remember_me, class: "mr-1"
-              = f.label :remember_me
+      .mt-3
+        - if devise_mapping.rememberable?
+            = f.check_box :remember_me, class: "mr-1"
+            = f.label :remember_me
 
-        .mt-4
-          = f.submit "Log in", class: button_style_bg_blue
+      .mt-4
+        = f.submit "Log in", class: button_style_bg_blue
 
-        .mt-4
-          = render "devise/shared/links"
+      .mt-4
+        = render "devise/shared/links"
