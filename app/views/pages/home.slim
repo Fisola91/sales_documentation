@@ -1,74 +1,70 @@
 .container.my-4.mx-auto.h-screen
-  .flex.mt-8.items-center.justify-center
-    .flex.flex-grow.flex-col.justify-start.items-start.text-left.text-shadow.mt-32.pt-0.w-4/5
-      .text-4xl.text-black.mb-6.font-bold.w-auto
+  .flex.flex-col.lg:flex-row.mt-8.items-center.justify-center
+    .flex.flex-grow.flex-col.items-center.text-center.text-shadow.mt-8.lg:mt-10.pt-0.w-4/5
+      .text-5xl.text-black.mb-6.font-bold.w-auto
         h1 Welcome to
         h1 Sales Doc
-      .items-start.text-black
-        h1 Experience the power of streamlined sales documentation
-        h1  designed to empower small and medium enterprises.
+      .items-start.text-md.text-black.lg:w-1/2
+        h1 Experience the power of streamlined sales documentation designed to empower small and medium enterprises.
       = link_to "Register", new_user_registration_path, class: "bg-blue-500 hover:bg-blue-300 mr-4 my-4 text-white font-bold py-2 px-4 rounded-full focus:shadow-outline register"
 
-    .flex.flex-col.justify-end.my-4
-      / .shadow-lg.w-full
-      = image_tag('sales_person.jpg', class: "rounded-lg")
-      .italic.text-right.my-2.font-bold
-        p.sm:text-sm "Harness the power of data to drive growth
-        p.sm:text-sm and elevate your business success."
-  h6.text-center.text-3xl.font-bold.mt-6 About
-  .text-lg.text-center
-    p Sales documentation aims to empower small and medium enterprises with efficient
-    p tools to manage and grow their businesses effortlessly. We understand the challenges faced
-    p by market women in keeping track of their sales, and gaining insights to make informed business decisions.
-    p That is why we have developed a user-friendly app tailored specifically to meet their needs.
-    p With our app, market women can say goodbye to the hassle of manual paperwork and embrace a more efficient
-    p way of managing their sales.
-  h6.text-center.text-3xl.my-6.font-bold Benefits
-  .flex.flex-wrap.justify-between
-    .flex-grow.w-full.sm:w-1/2.md:w-1/3.px-4.mb-4
-      .bg-white-300.rounded-xl.shadow-lg.shadow.inner
-        .flex.justify-center.mt-3 style="color:blue"
-          i.fa-solid.fa-chart-column.text-3xl
-        .font-bold.text-lg.mb-2.text-center.my-3 Sales Tracking
-        .px-2.sm:px-3.md:px-4.my-2.text-base.sm:text-lg.md:text-xl.text-center
-          p Track and monitor your daily, weekly, and monthly sales.
-          p This allows you to analyze sales performace, gain insights
-          p into revenue trends and optimize sales strategies.
-    .flex-grow.sm:w-1/2.md:w-1/3.px-4.mb-4
-      .bg-white-300.rounded-xl.shadow-lg.shadow.inner
-        .flex.justify-center.mt-3 style="color:blue"
-          i.fa-solid.fa-book.text-3xl
-        .font-bold.text-lg.mb-2.text-center.my-3 Business Insight
-        .px-2.sm:px-3.md:px-4.my-2.text-base.sm:text-lg.md:text-xl.text-center
-          p Gain valuable insights through your sales documentation by
-          p understanding sales trends and ultimately making informed
-          p business decisions based on comprehensive data analysis.
+    .flex.flex-col.justify-end.my-4.lg:w-3/4
+      = image_tag('sales_person.jpg', class: "rounded-lg w-full h-auto")
+  h6.text-center.text-3xl.font-bold.mt-6.mb-4 About
+  p.text-lg.text-center.mx-2.lg:mx-32
+    | Sales documentation aims to empower small and medium enterprises with efficient tools to
+    |  manage and grow their businesses effortlessly. We understand the challenges faced
+    |  by market women in keeping track of their sales, and gaining insights to make
+    |  informed business decisions. That is why we have developed a user-friendly
+    |  app tailored specifically to meet their needs. With our app, market
+    |  women can say goodbye to the hassle of manual paperwork and
+    |  embrace a more efficient way of managing their sales.
+  .py-16
+    h6.text-center.text-3xl.my-6.font-bold Benefits
+    .flex.flex-col.sm:flex-row.w-full
+      .flex.flex-grow.w-full.sm:w-1/2.md:w-1/3.px-4.mb-4
+        .max-w-md.mx-auto.bg-white-300.rounded-xl.shadow-lg.overflow-hidden
+          .px-4.py-3
+            .flex.justify-center.mt-3 style="color:blue"
+              i.fa-solid.fa-chart-column.text-3xl
+            .font-bold.text-lg.mb-2.text-center.my-3 Sales Tracking
+            .px-2.text-center.sm:text-md.lg:text-lg
+              | Track and monitor your daily, weekly, and monthly sales.
+              | This allows you to analyze sales performace, gain insights
+              | into revenue trends and optimize sales strategies.
+      .flex.flex-grow.sm:w-1/2.md:w-1/3.px-4.mb-4
+        .max-w-md.mx-auto.bg-white-300.rounded-xl.shadow-lg.overflow-hidden
+          .px-4.py-3
+            .flex.justify-center.mt-3 style="color:blue"
+              i.fa-solid.fa-book.text-3xl
+            .font-bold.text-lg.mb-2.text-center.my-3 Business Insight
+            .px-2.text-center.sm:text-md.lg:text-lg
+              | Gain valuable insights through your sales documentation by
+              |  understanding sales trends and ultimately making informed
+              | business decisions based on comprehensive data analysis.
   footer.mt-6
     .bg-blue-700.rounded-xl.overflow-hidden.shadow-lg.shadow.inner
-      .flex.flex-wrap.justify-between.mr-4.ml-4
-        .contact.text-white
-          h3.my-4.font-bold Contact
+      .flex.flex-wrap.justify-center.md:justify-between.text-white
+        .w-full.md:w-auto.text-start.md:text-left.ml-4.mb-6
+          h3.my-4.font-black.text-xl Contact
           p Sales Doc
           p 70 Hvidovre, 2650
           p.mb-4 Denmark
           p Tel: +45 318-316-61
           p Email: salesdoc@gmail.com
 
-        .flex.flex-col style="color:yellow"
-          h3.my-4.font-bold Stay connected
+        .w-full.md:w-auto.grid.grid-col-1.text-start.md:text-left.ml-4.mb-6 style="color:white"
+          h3.my-4.font-black.text-xl  Stay connected
           i.my-2.fa-brands.fa-facebook-f Facebook
           i.my-2.fa-brands.fa-linkedin  Linkedln
           i.fa-brands.fa-youtube Youtube
-        .message.text-white
-          h3.my-4.font-bold Partnerhip
-          .flex.justify-between.mx-4
-            .mr-4
-              p.mb-2 Work With Us
-              p.mb-2 Our Commitment
-              p.mb-2 Report a Bug
-              p Support Us
-            .mr-4
-              p.mb-2 Business Advices
-              p.mb-2 About
-              p FAQs
-
+        .w-full.md:w-auto.text-start.md:text-left.ml-4
+          h3.my-4.font-black.text-xl  Partnerhip
+          .grid.grid-cols-2.gap-2
+            p.mb-2 Work With Us
+            p.mb-2 Our Commitment
+            p.mb-2 Report a Bug
+            p Support Us
+            p.mb-2 FAQ
+            p.mb-2 About
+            p Business Advices
