@@ -10,7 +10,7 @@ html lang="en"
     = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
     = javascript_importmap_tags
 
-  body.m-0
+  body
     main
       = render NavBarComponent.new(user_signed_in: user_signed_in?)
       .max-w-md.mx-auto.mt-6
