@@ -1,4 +1,4 @@
-.max-w-md.mx-auto.mt-6
+.max-w-md.mx-auto.mt-16
   = form_with url: form_url, scope: :order, method: form_method, html: { class: "w-100", id: "form"}, data: { controller: "order", turbo: form_turbo } do |f|
     .mb-2
       = f.date_field :date, class: "block text-gray-700 text-sm font-bold", id: "date", value: created_date, data: { action: "input->order#selectedDate", "order-target": "date"}
