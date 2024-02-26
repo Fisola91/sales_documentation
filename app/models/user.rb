@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :orders
+  has_many :orders, dependent: :destroy
   validates :email, :encrypted_password, presence: true, uniqueness: true
 
   # Include default devise modules. Others available are:
