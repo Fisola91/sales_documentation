@@ -18,7 +18,6 @@ class SalesPerDayController < ApplicationController
                            .group(:date)
                            .select("date, SUM(total) as total")
                            .order(date: :asc)
-
   end
 
   def all_orders
