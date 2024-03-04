@@ -5,13 +5,13 @@
 
   .flex.flex-col.items-center.space-y-4.sm:flex-row.sm:space-y-0.sm:space-x-4.sm:items-start.sm:justify-center.mt-12
     = form_with url: dashboard_index_path, id: "month", method: :get do |f|
-      = f.hidden_field :monthly
+      = f.hidden_field :monthly, value: "monthly sales"
       = f.submit "monthly sales", class: button_style_bg_blue
     = form_with url: dashboard_index_path, id: "week", method: :get do |f|
-      = f.hidden_field :weekly
+      = f.hidden_field :weekly, value: "weekly sales"
       = f.submit "weekly sales", class: button_style_bg_blue
     = form_with url: dashboard_index_path, id: "day", method: :get do |f|
-      = f.hidden_field :daily
+      = f.hidden_field :daily, value: "daily sales"
       = f.submit "Last 10 days sales", class: button_style_bg_blue
 
   .flex.justify-between.font-medium.mt-12
