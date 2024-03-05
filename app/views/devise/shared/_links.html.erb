@@ -1,13 +1,13 @@
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name), class: "hover:underline", style: "color: blue;" %><br />
+  <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-blue-700  font-semibold hover:underline" %><br />
 <% end %>
 
 <%- if controller_name != 'sessions' %>
-  <%= link_to "Log in", new_session_path(resource_name), class: "hover:underline", style: "color: blue;" %><br />
+  <%= link_to "Log in", new_session_path(resource_name), class: "text-blue-700  font-semibold hover:underline" %><br />
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <p> Don't have an account? <%= link_to "Sign up here", new_registration_path(resource_name), class: "hover:underline", style: "color: blue;" %></p><br />
+  <p> Don't have an account? <%= link_to "Sign up here", new_registration_path(resource_name), class: "text-blue-700  font-semibold hover:underline" %></p><br />
 <% end %>
 
 

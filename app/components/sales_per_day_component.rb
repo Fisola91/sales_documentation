@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SalesPerDayComponent < ViewComponent::Base
   def initialize(orders:)
     @orders = orders

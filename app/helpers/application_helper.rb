@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def color_style
-    "color: blue; text-decoration: underline;"
+    "text-blue-500 underline"
   end
 
   def all_sales_link_with_bg_blue
