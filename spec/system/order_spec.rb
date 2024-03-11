@@ -105,7 +105,7 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("2.0")
         expect(page).to have_content("20.0")
         expect(page).to have_css(".svg-inline--fa.fa-pen-to-square")
-      expect(page).to have_css(".svg-inline--fa.fa-trash-can")
+        expect(page).to have_css(".svg-inline--fa.fa-trash-can")
       end
 
       fill_in 'Name', with: 'Product B'
@@ -127,7 +127,7 @@ RSpec.describe 'Order management', type: :system do
         expect(page).to have_content("2.0")
         expect(page).to have_content("20.0")
         expect(page).to have_css(".svg-inline--fa.fa-pen-to-square")
-      expect(page).to have_css(".svg-inline--fa.fa-trash-can")
+        expect(page).to have_css(".svg-inline--fa.fa-trash-can")
       end
 
       within all("#summary-table tbody tr").last do
