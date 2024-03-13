@@ -94,7 +94,7 @@ class OrdersController < ApplicationController
     params["date"]
   end
 
-  def order_manager(order = nil)
+  def order_manager(order = "")
     @order_manager ||= OrderManager.new(
       order: order,
       date: date_from_params,
