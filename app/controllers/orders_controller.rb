@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
 
   def destroy
     order = Order.find(params[:id])
-    order.destroy
+    order.destroy!
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.replace(
@@ -59,6 +59,9 @@ class OrdersController < ApplicationController
         )
       end
     end
+    rescue ActiveRecord::RecordNotDestroyed
+      flash[:alert] = "Order could not be deleted."
+      redirect_to orders_url
   end
 
   private
