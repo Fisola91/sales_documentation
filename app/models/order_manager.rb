@@ -18,15 +18,13 @@ class OrderManager
   end
 
   def update_order
-    order_hash = {
+    order.update(
       date: date,
       name: name,
       quantity: quantity,
       unit_price: unit_price,
       total: total
-    }
-
-    order.update(order_hash)
+    )
   end
 
   private
