@@ -59,7 +59,6 @@ class OrdersController < ApplicationController
           ]
         end
       end
-      # redirect_to orders_url
     else
       render :edit
     end
