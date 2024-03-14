@@ -45,7 +45,21 @@ class OrdersController < ApplicationController
     order = Order.find(params[:id])
 
     if order_manager(order).update_order
-      redirect_to orders_url
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace(
+              "summary-table",
+              SummaryTable.new(orders: all_orders(date_from_params))
+            ),
+            turbo_stream.replace(
+              "form",
+              NewOrderForm.new(order: Order.new(date: date_from_params))
+            )
+          ]
+        end
+      end
+      # redirect_to orders_url
     else
       render :edit
     end
@@ -68,14 +82,6 @@ class OrdersController < ApplicationController
   end
 
   private
-
-  def find_record
-    order = Order.find(params[:id])
-
-  rescue ActiveRecord::RecordNotFound => error
-    redirect_to orders_url, flash: {alert: error.message }
-    return
-  end
 
   def no_date_set?
     selected_date.nil?
@@ -116,6 +122,6 @@ class OrdersController < ApplicationController
   end
 
   def all_orders(date)
-    @all_orders ||= current_user_orders.created_on(date).order(date: :asc)
+    @all_orders ||= current_user_orders.created_on(date).order(created_at: :asc)
   end
 end
