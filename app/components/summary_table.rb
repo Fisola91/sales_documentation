@@ -13,7 +13,7 @@ class SummaryTable < ViewComponent::Base
 
   def date_caption
     if orders.empty?
-      nil
+      ""
     else
       orders.first.date.strftime("%Y-%m-%d")
     end

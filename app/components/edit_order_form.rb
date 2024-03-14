@@ -8,7 +8,7 @@ class EditOrderForm < OrderFormBase
   end
 
   def form_turbo
-    false
+    true
   end
 
   def submit

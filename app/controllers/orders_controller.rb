@@ -36,13 +36,29 @@ class OrdersController < ApplicationController
 
     @form = EditOrderForm.new(order: order)
     @summary = SummaryTable.new(orders: all_orders(order.date))
+
+  rescue ActiveRecord::RecordNotFound => error
+    redirect_to orders_url, flash: {alert: error.message }
   end
 
   def update
     order = Order.find(params[:id])
 
     if order_manager(order).update_order
-      redirect_to orders_url
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace(
+              "summary-table",
+              SummaryTable.new(orders: all_orders(date_from_params))
+            ),
+            turbo_stream.replace(
+              "form",
+              NewOrderForm.new(order: Order.new(date: date_from_params))
+            )
+          ]
+        end
+      end
     else
       render :edit
     end
@@ -50,15 +66,18 @@ class OrdersController < ApplicationController
 
   def destroy
     order = Order.find(params[:id])
-    order.destroy
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(
-          "summary-table",
-          SummaryTable.new(orders: all_orders(order.date))
-        )
+    if order.destroy!
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "summary-table",
+            SummaryTable.new(orders: all_orders(order.date))
+          )
+        end
       end
     end
+  rescue ActiveRecord::RecordNotFound => error
+    redirect_to orders_url, flash: {alert: error.message }
   end
 
   private
@@ -91,7 +110,7 @@ class OrdersController < ApplicationController
     params["date"]
   end
 
-  def order_manager(order = nil)
+  def order_manager(order = "")
     @order_manager ||= OrderManager.new(
       order: order,
       date: date_from_params,
@@ -102,6 +121,6 @@ class OrdersController < ApplicationController
   end
 
   def all_orders(date)
-    @all_orders ||= current_user_orders.created_on(date).order(date: :asc)
+    @all_orders ||= current_user_orders.created_on(date).order(created_at: :asc)
   end
 end
