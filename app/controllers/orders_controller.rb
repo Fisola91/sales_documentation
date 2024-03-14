@@ -36,6 +36,9 @@ class OrdersController < ApplicationController
 
     @form = EditOrderForm.new(order: order)
     @summary = SummaryTable.new(orders: all_orders(order.date))
+
+  rescue ActiveRecord::RecordNotFound => error
+    redirect_to orders_url, flash: {alert: error.message }
   end
 
   def update
@@ -50,21 +53,29 @@ class OrdersController < ApplicationController
 
   def destroy
     order = Order.find(params[:id])
-    order.destroy!
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(
-          "summary-table",
-          SummaryTable.new(orders: all_orders(order.date))
-        )
+    if order.destroy!
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "summary-table",
+            SummaryTable.new(orders: all_orders(order.date))
+          )
+        end
       end
     end
-    rescue ActiveRecord::RecordNotDestroyed
-      flash[:alert] = "Order could not be deleted."
-      redirect_to orders_url
+  rescue ActiveRecord::RecordNotFound => error
+    redirect_to orders_url, flash: {alert: error.message }
   end
 
   private
+
+  def find_record
+    order = Order.find(params[:id])
+
+  rescue ActiveRecord::RecordNotFound => error
+    redirect_to orders_url, flash: {alert: error.message }
+    return
+  end
 
   def no_date_set?
     selected_date.nil?
