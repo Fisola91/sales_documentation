@@ -121,6 +121,6 @@ class OrdersController < ApplicationController
   end
 
   def all_orders(date)
-    @all_orders ||= current_user_orders.created_on(date).order(created_at: :asc)
+    @all_orders ||= current_user_orders.created_on(date).order(created_at: :desc)
   end
 end
