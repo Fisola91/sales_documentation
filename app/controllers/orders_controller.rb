@@ -116,7 +116,7 @@ class OrdersController < ApplicationController
   end
 
   def order_manager(order = "")
-    @order_manager ||= OrderManager.new(
+    OrderManager.new(
       order: order,
       date: date_from_params,
       name: name,
