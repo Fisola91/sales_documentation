@@ -45,6 +45,7 @@ class OrdersController < ApplicationController
     order = Order.find(params[:id])
 
     if order_manager(order).update_order
+
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: [
@@ -55,6 +56,10 @@ class OrdersController < ApplicationController
             turbo_stream.replace(
               "form",
               NewOrderForm.new(order: Order.new(date: date_from_params))
+            ),
+            turbo_stream.before(
+              "form",
+              partial: "orders/updated_message"
             )
           ]
         end
