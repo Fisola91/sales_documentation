@@ -122,21 +122,21 @@ RSpec.describe 'Order management', type: :system do
       end
 
       within all("#summary-table tbody tr").first do
-        expect(page).to have_content("Product C")
-        expect(page).to have_content("10.0")
-        expect(page).to have_content("2.0")
-        expect(page).to have_content("20.0")
-        expect(page).to have_css(".svg-inline--fa.fa-pen-to-square")
-        expect(page).to have_css(".svg-inline--fa.fa-trash-can")
-      end
-
-      within all("#summary-table tbody tr").last do
         expect(page).to have_content("Product B")
         expect(page).to have_content("10.0")
         expect(page).to have_content("3.0")
         expect(page).to have_content("30.0")
         expect(page).to have_css(".svg-inline--fa.fa-pen-to-square")
       expect(page).to have_css(".svg-inline--fa.fa-trash-can")
+      end
+
+      within all("#summary-table tbody tr").last do
+        expect(page).to have_content("Product C")
+        expect(page).to have_content("10.0")
+        expect(page).to have_content("2.0")
+        expect(page).to have_content("20.0")
+        expect(page).to have_css(".svg-inline--fa.fa-pen-to-square")
+        expect(page).to have_css(".svg-inline--fa.fa-trash-can")
       end
 
       within ("#summary-table tfoot tr") do
