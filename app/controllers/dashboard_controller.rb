@@ -1,4 +1,5 @@
 class DashboardController < ApplicationController
+  include ApplicationHelper
   def index
     if params[:daily]
       @period = group_and_map_by_period(:day, 10)
@@ -23,15 +24,11 @@ class DashboardController < ApplicationController
     current_user_orders.public_send("group_by_#{period}", :date, last: last_option)
       .sum(:total)
       .map do |date, total|
-        [formatted_date(date), total]
+        if params[:monthly]
+          [DatePresenter.formatted_monthly_year(date), total]
+        else
+          [DatePresenter.formatted_monthly_date(date), total]
+        end
       end
-  end
-
-  def formatted_date(date)
-    params[:monthly] ? parsed_date(date).strftime("%b %Y") : parsed_date(date).strftime("%b %d")
-  end
-
-  def parsed_date(date)
-    Date.parse(date.to_s)
   end
 end

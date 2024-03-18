@@ -1,8 +1,9 @@
 class SalesPerDayController < ApplicationController
 
   def index
-    if params[:date_range]
-      start_date, end_date = params[:date_range].split(" - ")
+    date_range = params[:date_range]
+    if date_range
+      start_date, end_date = date_range.split(" - ")
 
       @all_sales = SalesPerDayComponent.new(orders: selected_orders(start_date, end_date))
     else
