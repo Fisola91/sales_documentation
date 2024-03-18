@@ -7,6 +7,10 @@ class DatePresenter
     parsed_date(date).strftime("%b %Y")
   end
 
+  def self.date_format(date)
+    date.strftime("%Y-%m-%d")
+  end
+
   private
 
   def self.parsed_date(date)

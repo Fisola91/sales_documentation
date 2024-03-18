@@ -30,8 +30,4 @@ module ApplicationHelper
   def image_tag_for_nav_bar
     image_tag('logo.png', alt: 'sales logo', size: '100x100', id: "image", class: "sales-logo rounded-full")
   end
-
-  def date_format(date)
-    date.strftime("%Y-%m-%d")
-  end
 end

@@ -1,5 +1,4 @@
 class SalesPerDayComponent < ViewComponent::Base
-  include ApplicationHelper
   def initialize(orders:)
     @orders = orders
   end
@@ -9,8 +8,5 @@ class SalesPerDayComponent < ViewComponent::Base
   end
 
   attr_reader :orders
-
-  private
-
 end
 

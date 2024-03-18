@@ -8,7 +8,7 @@ table#all-sales-table.w-full.border-collapse.my-4
   tbody
   - orders.each do |order|
     tr
-      td.border.px-4.text-left = date_format(order.date)
+      td.border.px-4.text-left = DatePresenter.date_format(order.date)
       td.border.px-4.text-right = order.total
       td.border.px-4.text-right = form_with url: orders_path, method: :get do |f|
         = f.hidden_field :date, value: order.date
