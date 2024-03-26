@@ -5,7 +5,7 @@
 
 <ul dir="auto">
    <li>
-    <a href="#project-aim">Project aims</a>
+    <a href="#project-aim">Project aim</a>
   </li>
   <li>
     <a href="#live-preview">Live preview</a>
